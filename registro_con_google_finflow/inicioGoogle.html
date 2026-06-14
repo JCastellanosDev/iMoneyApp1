@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico"/>
+<link rel="stylesheet" href="../css/brand.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"/>
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>iMoney - Seleccionar cuenta</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f7f9fb",
+                    "on-secondary-container": "#57657b",
+                    "on-background": "#191c1e",
+                    "inverse-primary": "#bec6e0",
+                    "secondary": "#515f74",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#89ceff",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#d5e3fd",
+                    "primary-container": "#131b2e",
+                    "on-surface-variant": "#45464d",
+                    "on-primary-fixed": "#131b2e",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-tertiary-fixed-variant": "#004c6e",
+                    "on-surface": "#191c1e",
+                    "on-secondary-fixed-variant": "#3a485c",
+                    "tertiary-fixed": "#c9e6ff",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#dae2fd",
+                    "surface-container-high": "#e6e8ea",
+                    "on-tertiary-fixed": "#001e2f",
+                    "surface-tint": "#565e74",
+                    "inverse-surface": "#2d3133",
+                    "tertiary": "#000000",
+                    "secondary-container": "#d5e3fd",
+                    "outline": "#76777d",
+                    "on-primary-container": "#7c839b",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#b9c7e0",
+                    "on-tertiary-container": "#008cc7",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container-low": "#f2f4f6",
+                    "tertiary-container": "#001e2f",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "primary": "#000000",
+                    "surface": "#f7f9fb",
+                    "on-error-container": "#93000a",
+                    "background": "#f7f9fb",
+                    "surface-container": "#eceef0",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-secondary-fixed": "#0d1c2f",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#c6c6cd",
+                    "surface-dim": "#d8dadc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "32px",
+                    "gutter": "16px",
+                    "md": "16px",
+                    "container-margin": "24px",
+                    "unit": "4px",
+                    "sm": "8px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .account-item:hover {
+            background-color: #f2f4f6;
+        }
+        .google-logo-wrapper svg {
+            width: 74px;
+            height: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-bright min-h-screen flex flex-col items-center justify-center p-md">
+<!-- Account Selection Container -->
+<main class="w-full max-w-[448px] bg-surface-container-lowest rounded-xl border border-outline-variant p-xl shadow-sm">
+<!-- Header Section -->
+<div class="flex flex-col items-center mb-lg">
+<div class="mb-lg">
+<!-- Google Logo -->
+<svg class="h-6" viewbox="0 0 74 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.747 12.184V9.333h6.808c.07.382.112.744.112 1.22 0 1.503-.4 3.633-1.637 4.88-1.21 1.272-2.748 1.93-4.883 1.93-4.464 0-8.15-3.637-8.15-8.15C0 4.464 3.686.827 8.15.827c2.443 0 4.248.97 5.565 2.227l-2.02 2.02c-1.1-1.033-2.508-1.786-4.045-1.786-3.235 0-5.83 2.628-5.83 5.86 0 3.234 2.595 5.86 5.83 5.86 2.062 0 3.243-.83 3.99-1.576.643-.643 1.066-1.554 1.218-2.748H8.15v.001z" fill="#4285F4"></path>
+<path d="M22.06 17.363c-2.73 0-4.942-2.087-4.942-4.863s2.21-4.863 4.942-4.863c2.73 0 4.943 2.087 4.943 4.863s-2.212 4.863-4.942 4.863zm0-1.92c1.65 0 2.983-1.344 2.983-2.943s-1.332-2.942-2.983-2.942c-1.652 0-2.984 1.343-2.984 2.942s1.332 2.943 2.984 2.943z" fill="#EA4335"></path>
+<path d="M32.895 17.363c-2.73 0-4.943-2.087-4.943-4.863s2.212-4.863 4.943-4.863c2.73 0 4.942 2.087 4.942 4.863s-2.21 4.863-4.942 4.863zm0-1.92c1.65 0 2.983-1.344 2.983-2.943s-1.333-2.942-2.983-2.942c-1.65 0-2.983 1.343-2.983 2.942s1.333 2.943 2.983 2.943z" fill="#FBBC05"></path>
+<path d="M43.344 17.363c-2.652 0-4.89-2.087-4.89-4.863s2.238-4.863 4.89-4.863c1.33 0 2.455.513 3.193 1.218l-2.02 2.02c-.413-.414-1.04-.766-1.745-.766-1.503 0-2.775 1.258-2.775 2.865s1.272 2.865 2.775 2.865c1.474 0 2.12-.96 2.37-1.464.2-.39.294-.852.333-1.304h-2.703V9.83h5.45c.05.285.084.62.084.97 0 1.62-.444 3.864-1.895 5.315-1.42 1.433-3.234 2.248-5.567 2.248z" fill="#4285F4"></path>
+<path d="M52.09 1.26v15.65h-2.584V1.26H52.09z" fill="#34A853"></path>
+<path d="M60.89 17.363c-1.432 0-2.695-.73-3.463-1.82l9.043-3.75-.313-.78c-.54-1.46-2.182-4.376-5.186-4.376-2.984 0-5.495 2.355-5.495 4.863 0 2.65 2.484 4.863 5.413 4.863 2.355 0 3.722-1.434 4.29-2.285l-1.745-1.163c-.568.855-1.35 1.448-2.544 1.448zm-.213-7.534c1.135 0 2.103.58 2.413 1.396l-5.845 2.424c0-1.832 1.332-3.82 3.432-3.82z" fill="#EA4335"></path>
+</svg>
+</div>
+<h1 class="text-headline-md font-headline-md text-on-surface mb-xs">Elige una cuenta</h1>
+<p class="text-body-md font-body-md text-on-surface-variant">para continuar a <span class="brand-name font-semibold text-primary"><span class="brand-i">i</span>Money</span></p>
+</div>
+<!-- Accounts List -->
+<div class="space-y-unit">
+<!-- Account 1 -->
+<button class="account-item w-full flex items-center p-md border-b border-outline-variant transition-colors cursor-pointer text-left">
+<div class="relative w-10 h-10 rounded-full overflow-hidden mr-md bg-secondary-fixed">
+<img alt="Avatar de usuario" class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged man with a friendly expression, set against a soft-focus office background. The lighting is bright and natural, reflecting a trustworthy financial expert aesthetic. The image follows a high-key light mode style with clean lines and a subtle corporate elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhFtEwhQK5bFI_-gHzorZ_Fj-QzpzAOO_vpo2badlA5DnAkxeENCcT5nOEkojRq5CDqDdhrDAaQpK_98Y2GYoGhqAjgV-7_Q0cW6tmsesDMJH9MqwcJwqpGbl0oWTAHygchSeBehX0ZU67LJAT9Zvy1xYbLaNkgdaPxFlhZE-gyNuMzu9jTZ6ztWjGqobaNkqfGaKBY8D9zyKbDvapVW1K1iFZzyc8fjZ8QnTY6R7Yyp7vOsQNeSt5mJTKzCq-gCWFwV1lMl8B8OE"/>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Carlos Mendoza</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">carlos.mendoza@gmail.com</p>
+</div>
+</button>
+<!-- Account 2 -->
+<button class="account-item w-full flex items-center p-md border-b border-outline-variant transition-colors cursor-pointer text-left">
+<div class="relative w-10 h-10 rounded-full overflow-hidden mr-md bg-secondary-fixed">
+<img alt="Avatar de usuario" class="w-full h-full object-cover" data-alt="Close-up portrait of a young professional woman with a warm and confident smile. The background is a minimalist, white-toned space with soft shadows, aligning with a premium fintech interface. The photography style is modern and sharp, using neutral tones to convey stability and intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJSWHbDrmqIpOFp_b1OyylX56jgiCeNxsY0JTnQ11XcPA9KB-vY8zK6A1TE5e1L3yPVMkGcZ_4ly8uCE8z-KHKJndLX79uoaQbMSWrPhaA5K0K_reqEODy-LRfC3RcICz_sAB0vN-HB_OFPP7aFnS08hNn2ULOMN03b1wSoeohSPYXP9kEquDj1D05146JldADKecVz1rM-n8_s2rc0ie6OOi3McKVIGWjS8fjBMAL8vhiCB-aqJoJf-MZI2pqQwpz6WEeqh6j4NE"/>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Elena Rodríguez</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">elena.rod88@gmail.com</p>
+</div>
+<div class="bg-surface-container-high px-sm py-[2px] rounded-full">
+<span class="text-[10px] font-bold text-on-secondary-container">ACTIVA</span>
+</div>
+</button>
+<!-- Use another account -->
+<button class="account-item w-full flex items-center p-md transition-colors cursor-pointer text-left">
+<div class="w-10 h-10 rounded-full flex items-center justify-center mr-md bg-surface-container">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_circle">account_circle</span>
+</div>
+<div class="flex-grow">
+<p class="text-label-md font-label-md text-on-surface">Usar otra cuenta</p>
+</div>
+</button>
+</div>
+<!-- Security Message -->
+<div class="mt-lg p-md bg-surface-container-low rounded-lg">
+<p class="text-label-sm font-label-sm text-on-surface-variant leading-relaxed">
+                Para continuar, Google compartirá tu nombre, dirección de correo electrónico, preferencia de idioma y foto de perfil con <span class="brand-name font-bold"><span class="brand-i">i</span>Money</span>. Antes de usar esta aplicación, consulta su <a class="text-primary hover:underline" href="#">Política de Privacidad</a> y sus <a class="text-primary hover:underline" href="#">Términos de Servicio</a>.
+            </p>
+</div>
+</main>
+<!-- Footer Links -->
+<footer class="mt-xl w-full max-w-[448px] flex flex-wrap justify-between items-center px-xs">
+<div class="flex space-x-md">
+<select class="bg-transparent border-none text-label-sm font-label-sm text-on-surface-variant focus:ring-0 cursor-pointer">
+<option selected="" value="es">Español (España)</option>
+<option value="en">English (US)</option>
+<option value="pt">Português</option>
+</select>
+</div>
+<div class="flex space-x-lg">
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Ayuda</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Privacidad</a>
+<a class="text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-colors" href="#">Términos</a>
+</div>
+</footer>
+<!-- Simple Interaction Script -->
+<script>
+        document.querySelectorAll('.account-item').forEach(item => {
+            item.addEventListener('click', () => {
+                // Visual feedback
+                item.style.backgroundColor = '#e0e3e5';
+                setTimeout(() => {
+                    item.style.backgroundColor = '';
+                }, 200);
+            });
+        });
+    </script>
+</body></html>

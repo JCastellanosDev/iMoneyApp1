@@ -1,0 +1,20 @@
+// ════════════════════════════════════════════════════════════════
+//  Reglas de seguridad de Firestore para FinFlow / iMoney.
+//
+//  CÓMO APLICAR:
+//    Firebase Console → Firestore Database → Reglas → pega este contenido → Publicar
+//
+//  POR QUÉ:
+//    El backend usa Firebase Admin SDK, que ignora estas reglas y siempre
+//    tiene acceso completo. Denegar todo el acceso desde el SDK web/móvil
+//    evita que alguien use las credenciales públicas del frontend para
+//    leer o escribir Firestore directamente, saltándose el API REST.
+// ════════════════════════════════════════════════════════════════
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

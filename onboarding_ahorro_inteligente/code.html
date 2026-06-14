@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico"/>
+<link rel="stylesheet" href="../css/brand.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"/>
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Onboarding - Ahorra sin Esfuerzo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "inverse-primary": "#b4c5ff",
+                    "on-primary-fixed": "#00174b",
+                    "background": "#f7f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#001f26",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "inverse-surface": "#2d3133",
+                    "secondary": "#0058be",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-dim": "#d8dadc",
+                    "on-tertiary-container": "#d7f6ff",
+                    "on-background": "#191c1e",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#eeefff",
+                    "on-surface-variant": "#434655",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "surface-tint": "#0053db",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-container": "#2170e4",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "primary-fixed": "#dbe1ff",
+                    "primary": "#004ac6",
+                    "tertiary": "#005e6e",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container": "#eceef0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "tertiary-container": "#00788c",
+                    "surface-container-high": "#e6e8ea",
+                    "tertiary-fixed": "#acedff",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary-container": "#fefcff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#d8e2ff",
+                    "outline-variant": "#c3c6d7",
+                    "outline": "#737686"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "xs": "4px",
+                    "lg": "40px",
+                    "gutter": "24px",
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #ffffff;
+            color: #191c1e;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        .canvas-bg {
+            background: radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.03) 0%, transparent 50%);
+        }
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col items-center">
+<!-- Top AppBar Strategy (Shared Component Logic) -->
+<nav class="w-full top-0 flex justify-between items-center px-margin-mobile py-4 bg-background z-10">
+<button aria-label="Go back" class="p-2 transition-opacity duration-200 hover:opacity-80">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<button class="font-label-md text-label-md text-on-surface-variant transition-opacity duration-200 hover:opacity-80">
+            Skip
+        </button>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full max-w-md px-margin-mobile flex flex-col items-center justify-between py-md canvas-bg relative overflow-hidden">
+<!-- Illustration Section -->
+<div class="w-full flex-1 flex items-center justify-center relative">
+<!-- Decorative atmospheric circles -->
+<div class="absolute w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
+<div class="relative w-full max-w-[280px] aspect-square floating">
+<img alt="Ahorra sin Esfuerzo" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuR3NIQvaj7j4Dc-mYWLBP_L3qDi-b3SZB-zUO3cbVOeXKHp7liQuWkDi-O2N7sD0oBsSMUCfFWJzghQO_tfBeJG_27zAquwAs6JI6j8wLeVl3Sch7c7-5nVFX0pxP15K8myZYkvfg3nKRxOmKR0qEO-V_0KSOHvYRD9QVRzSWQfRaPCAo0e8_Zr0wUZI5GY1a2tIGHakH0y68x-4rbeEojSjDexG2iR0aETgS73xGum6D0gy_uxx6EgdsjPYVHYqvmlxFr48qcsM"/>
+<!-- Subtle UI elements to enhance the financial context -->
+<div class="absolute -right-4 top-1/4 bg-surface-container-lowest shadow-xl p-3 rounded-xl border border-outline-variant/30 fade-in" style="animation-delay: 0.5s;">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">+€12.50</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Text Content -->
+<div class="w-full text-center mt-xl mb-xl fade-in" style="animation-delay: 0.2s;">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-sm tracking-tight">
+                Ahorra sin Esfuerzo
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Establece metas y mira cómo tus ahorros crecen día a día.
+            </p>
+</div>
+<!-- Controls & Navigation -->
+<div class="w-full flex flex-col items-center gap-xl pb-xl fade-in" style="animation-delay: 0.4s;">
+<!-- Pagination Dots (3 of 4 active) -->
+<div class="flex items-center gap-xs">
+<div class="h-1.5 w-1.5 rounded-full bg-outline-variant"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-outline-variant"></div>
+<div class="h-1.5 w-6 rounded-full bg-primary-container transition-all duration-300"></div>
+<div class="h-1.5 w-1.5 rounded-full bg-outline-variant"></div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full py-4 bg-primary-container text-on-primary-container font-label-md text-label-md rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 active:scale-[0.98] transition-all duration-200">
+                Siguiente
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Suppressed for Onboarding Flow per PRD) -->
+<script>
+        // Micro-interaction for the button
+        const nextBtn = document.querySelector('button.bg-primary-container');
+        nextBtn.addEventListener('click', () => {
+            nextBtn.classList.add('scale-95');
+            setTimeout(() => {
+                nextBtn.classList.remove('scale-95');
+            }, 100);
+        });
+
+        // Atmospheric background pulse logic
+        const bgElements = document.querySelectorAll('.canvas-bg div');
+        window.addEventListener('mousemove', (e) => {
+            const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
+            const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+            bgElements.forEach(el => {
+                el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+    </script>
+</body></html>

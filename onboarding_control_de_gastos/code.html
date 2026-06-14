@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico"/>
+<link rel="stylesheet" href="../css/brand.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"/>
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Onboarding - Registra tus Gastos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "inverse-primary": "#b4c5ff",
+                    "on-primary-fixed": "#00174b",
+                    "background": "#f7f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#001f26",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "inverse-surface": "#2d3133",
+                    "secondary": "#0058be",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed": "#001a42",
+                    "surface-dim": "#d8dadc",
+                    "on-tertiary-container": "#d7f6ff",
+                    "on-background": "#191c1e",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#eeefff",
+                    "on-surface-variant": "#434655",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "surface-tint": "#0053db",
+                    "surface-container-low": "#f2f4f6",
+                    "secondary-container": "#2170e4",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface": "#191c1e",
+                    "on-secondary": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "primary-fixed": "#dbe1ff",
+                    "primary": "#004ac6",
+                    "tertiary": "#005e6e",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container": "#eceef0",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "tertiary-container": "#00788c",
+                    "surface-container-high": "#e6e8ea",
+                    "tertiary-fixed": "#acedff",
+                    "on-tertiary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary-container": "#fefcff",
+                    "on-secondary-fixed-variant": "#004395",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#d8e2ff",
+                    "outline-variant": "#c3c6d7",
+                    "outline": "#737686"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "12px",
+                    "xs": "4px",
+                    "lg": "40px",
+                    "gutter": "24px",
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "xl": "64px",
+                    "md": "24px",
+                    "margin-mobile": "20px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            color: #191c1e;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pagination-dot {
+            transition: all 0.3s ease;
+        }
+        .active-dot {
+            width: 24px;
+            border-radius: 9999px;
+        }
+        .illustration-container {
+            perspective: 1000px;
+        }
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-background">
+<!-- Top AppBar Component -->
+<header class="w-full top-0 flex justify-between items-center px-margin-mobile py-4 w-full bg-background transition-opacity duration-200">
+<button aria-label="Regresar" class="flex items-center justify-center p-2 rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<button class="font-label-md text-label-md text-on-surface-variant hover:opacity-80 transition-opacity duration-200">
+            Skip
+        </button>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile max-w-xl mx-auto w-full">
+<!-- Central Illustration Container -->
+<div class="relative w-full aspect-square max-w-[400px] mb-lg illustration-container">
+<div class="absolute inset-0 bg-primary-container/5 rounded-full blur-3xl scale-90"></div>
+<div class="relative z-10 w-full h-full flex items-center justify-center floating-card">
+<img alt="Fintech illustration of mobile expense tracking" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMtiwGGFdKdq4BxDBAuz2HJ-6m1W7DBLBIQjA1XvOrRoRaunOsbZB7UqF06xB07vDhH8h86hZ1VhQvIgyvw9UjKYzJu7nqGRKKu5fRONVbpjro3oxixRXmRegHPm3sjRjnf3ntW-RiDSqrEr_peZt1627pBsK4TesTVZxnN9Ss-83Ute-1euEb1yHUl3nospwXRIJSwO2xB3NRc77ggxqqfPq54tr9z1gDStRoXwIMghH_aUURPwl0-M1TvlOSKFITZfGxZXWvmmQ"/>
+</div>
+</div>
+<!-- Text Content Section -->
+<div class="text-center space-y-sm mb-xl">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface">
+                Registra tus Gastos
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant px-4">
+                Escanea tus tickets y visualiza tus consumos al instante con gráficos claros.
+            </p>
+</div>
+</main>
+<!-- Bottom Navigation & Controls -->
+<footer class="w-full px-margin-mobile pb-xl flex flex-col items-center gap-lg">
+<!-- Pagination Dots -->
+<div class="flex items-center gap-xs">
+<div class="pagination-dot w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="pagination-dot active-dot h-2 bg-primary"></div>
+<div class="pagination-dot w-2 h-2 rounded-full bg-outline-variant"></div>
+<div class="pagination-dot w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<!-- Action Button -->
+<div class="w-full max-w-sm">
+<button class="w-full py-4 bg-primary text-on-primary font-label-md text-body-lg rounded-xl shadow-lg shadow-primary/20 active:scale-[0.98] transition-all duration-200">
+                Siguiente
+            </button>
+</div>
+</footer>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelector('button.bg-primary').addEventListener('mousedown', function() {
+            this.classList.add('brightness-90');
+        });
+        document.querySelector('button.bg-primary').addEventListener('mouseup', function() {
+            this.classList.remove('brightness-90');
+        });
+        
+        // Simple entry animation
+        window.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('h1, p, img, button');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(10px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body></html>

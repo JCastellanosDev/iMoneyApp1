@@ -1,0 +1,135 @@
+### ════════════════════════════════════════════════════════════════
+###  FinFlow API — pruebas rápidas
+###  Usa la extensión "REST Client" de VS Code (Send Request) o copia
+###  los curl equivalentes del final del archivo.
+###  Flujo: ejecuta LOGIN, copia el token y pégalo en @token.
+### ════════════════════════════════════════════════════════════════
+
+@base = http://localhost:3000/api
+@token = PEGA_AQUI_EL_TOKEN
+
+### Health
+GET {{base}}/health
+
+### Categorías
+GET {{base}}/categorias
+
+### Registro
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{ "nombre": "Juan Pérez", "email": "juan@test.mx", "password": "secreto1" }
+
+### Login (usuario demo — corre `npm run seed` antes)
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "email": "demo@finflow.mx", "password": "demo1234" }
+
+### Login con Google
+POST {{base}}/auth/google
+Content-Type: application/json
+
+{ "email": "google@test.mx", "nombre": "Usuario Google" }
+
+### Usuario actual
+GET {{base}}/auth/me
+Authorization: Bearer {{token}}
+
+### Dashboard
+GET {{base}}/dashboard
+Authorization: Bearer {{token}}
+
+### Historial completo
+GET {{base}}/transacciones
+Authorization: Bearer {{token}}
+
+### Historial — solo ingresos
+GET {{base}}/transacciones?tipo=ingreso
+Authorization: Bearer {{token}}
+
+### Historial — solo gastos (5 más recientes)
+GET {{base}}/transacciones?tipo=gasto&limite=5
+Authorization: Bearer {{token}}
+
+### Crear gasto
+POST {{base}}/transacciones
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "tipo": "gasto", "monto": 84.50, "descripcion": "Supermercado",
+  "categoria": "Comida", "metodo_pago": "Tarjeta", "comercio": "Súper Central" }
+
+### Crear ingreso recurrente
+POST {{base}}/transacciones
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "tipo": "ingreso", "monto": 2850, "descripcion": "Nómina mensual",
+  "recurrente": true, "frecuencia": "mensual" }
+
+### Actualizar transacción (reemplaza :id)
+PUT {{base}}/transacciones/REEMPLAZA_ID
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "monto": 99.90 }
+
+### Borrar transacción (reemplaza :id)
+DELETE {{base}}/transacciones/REEMPLAZA_ID
+Authorization: Bearer {{token}}
+
+### Perfil
+GET {{base}}/perfil
+Authorization: Bearer {{token}}
+
+### Editar perfil + ajustes
+PUT {{base}}/perfil
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "nombre": "Alex R", "ajustes": { "notificaciones": true, "biometria": true } }
+
+### Config de ingreso
+PUT {{base}}/config/ingreso
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "monto": 1500, "frecuencia": "quincenal" }
+
+### Ahorros
+PUT {{base}}/ahorros
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "meta": 12000, "actual": 5000 }
+
+### Coach IA
+POST {{base}}/coach
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{}
+
+### Leer ticket (imageBase64 de ejemplo: 1px PNG)
+POST {{base}}/leer-ticket
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "imageBase64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==", "mediaType": "image/png" }
+
+### ────────────────────────────────────────────────────────────────
+### Equivalentes en curl (terminal):
+###
+### curl http://localhost:3000/api/health
+###
+### TOKEN=$(curl -s -X POST http://localhost:3000/api/auth/login \
+###   -H 'Content-Type: application/json' \
+###   -d '{"email":"demo@finflow.mx","password":"demo1234"}' \
+###   | python3 -c 'import sys,json;print(json.load(sys.stdin)["data"]["token"])')
+###
+### curl http://localhost:3000/api/dashboard -H "Authorization: Bearer $TOKEN"
+###
+### curl -X POST http://localhost:3000/api/transacciones \
+###   -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' \
+###   -d '{"tipo":"gasto","monto":84.5,"descripcion":"Súper","categoria":"Comida","metodo_pago":"Tarjeta"}'

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico"/>
+<link rel="stylesheet" href="../css/brand.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"/>
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>iMoney - Historial de Transacciones</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f7f9fb",
+                    "surface-tint": "#0053db",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#001a42",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "surface": "#f7f9fb",
+                    "tertiary": "#005e6e",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface-variant": "#434655",
+                    "on-surface": "#191c1e",
+                    "error-container": "#ffdad6",
+                    "secondary": "#0058be",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#2170e4",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary": "#ffffff",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary-container": "#eeefff",
+                    "error": "#ba1a1a",
+                    "surface-container": "#eceef0",
+                    "primary": "#004ac6",
+                    "outline-variant": "#c3c6d7",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-low": "#f2f4f6",
+                    "on-background": "#191c1e",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-tertiary-fixed": "#001f26",
+                    "surface-dim": "#d8dadc",
+                    "inverse-surface": "#2d3133",
+                    "tertiary-fixed": "#acedff",
+                    "secondary-fixed": "#d8e2ff",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#2563eb",
+                    "on-secondary-container": "#fefcff",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "outline": "#737686",
+                    "inverse-primary": "#b4c5ff",
+                    "tertiary-container": "#00788c",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "on-tertiary-container": "#d7f6ff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-primary-fixed": "#00174b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base": "8px",
+                    "lg": "40px",
+                    "xl": "64px",
+                    "xs": "4px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "margin-mobile": "20px",
+                    "margin-desktop": "48px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-filter {
+            background-color: #2563eb;
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        }
+        /* Custom scrollbar for cleanliness */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8e0;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background dark:bg-background z-40">
+<div class="flex justify-between items-center px-margin-mobile py-sm w-full">
+<div class="flex items-center gap-3">
+<img src="../img/logo-sm.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
+<span class="brand-name font-display text-display text-primary dark:text-primary-fixed-dim tracking-tight text-[20px] leading-tight"><span class="brand-i">i</span>Money</span>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed-dim p-2 hover:bg-surface-container-low transition-colors rounded-full active:scale-95 duration-200">
+                notifications
+            </button>
+</div>
+</header>
+<main class="px-margin-mobile pt-4 max-w-2xl mx-auto">
+<!-- Section Title & Search -->
+<div class="flex justify-between items-end mb-6">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background">Historial</h1>
+<button class="material-symbols-outlined text-outline p-2 rounded-full hover:bg-surface-container transition-colors">
+                search
+            </button>
+</div>
+<!-- Quick Filters -->
+<div class="flex gap-2 mb-8 overflow-x-auto pb-2 no-scrollbar">
+<button class="px-6 py-2.5 rounded-full font-label-md text-label-md active-filter transition-all active:scale-95" id="filter-all" onclick="filterType('Todos')">
+                Todos
+            </button>
+<button class="px-6 py-2.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-outline border border-outline-variant hover:border-primary transition-all active:scale-95" id="filter-expenses" onclick="filterType('Gastos')">
+                Gastos
+            </button>
+<button class="px-6 py-2.5 rounded-full font-label-md text-label-md bg-surface-container-lowest text-outline border border-outline-variant hover:border-primary transition-all active:scale-95" id="filter-income" onclick="filterType('Ingresos')">
+                Ingresos
+            </button>
+</div>
+<!-- Lista de transacciones (poblada por JS, agrupada por fecha) -->
+<div id="hist-list"></div>
+<p id="hist-empty" class="hidden text-center text-outline py-10 font-label-md">Sin transacciones para este filtro.</p>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest dark:bg-inverse-surface z-50 rounded-t-xl shadow-xl">
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline-variant p-3 hover:text-primary dark:hover:text-primary-fixed transition-all active:scale-90 duration-300 ease-out" href="../index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Panel</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline-variant p-3 hover:text-primary dark:hover:text-primary-fixed transition-all active:scale-90 duration-300 ease-out" href="../cartera/ingresoYGasto.html">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm mt-1">Cartera</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 transition-all active:scale-90 duration-300 ease-out shadow-lg" href="../historial_de_transacciones_finflow/historial.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-sm text-label-sm mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline dark:text-outline-variant p-3 hover:text-primary dark:hover:text-primary-fixed transition-all active:scale-90 duration-300 ease-out" href="../ajustes_finflow/ajustes.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Ajustes</span>
+</a>
+</nav>
+<script>
+        function filterType(type) {
+            const buttons = ['filter-all', 'filter-expenses', 'filter-income'];
+            buttons.forEach(id => {
+                const btn = document.getElementById(id);
+                btn.classList.remove('active-filter');
+                btn.classList.add('bg-surface-container-lowest', 'text-outline', 'border', 'border-outline-variant');
+            });
+            const activeBtn = document.getElementById(`filter-${type === 'Todos' ? 'all' : (type === 'Gastos' ? 'expenses' : 'income')}`);
+            activeBtn.classList.add('active-filter');
+            activeBtn.classList.remove('bg-surface-container-lowest', 'text-outline', 'border', 'border-outline-variant');
+            // Recarga la lista con el filtro elegido.
+            const tipo = type === 'Gastos' ? 'gasto' : type === 'Ingresos' ? 'ingreso' : '';
+            cargarHistorial(tipo);
+        }
+    </script>
+    <script src="../js/api.js"></script>
+    <script>
+        API.requireSession('../login_compacto_gesti_n_de_ahorro/inicioSesion.html');
+
+        const ICONO_CAT = {
+            Comida: 'restaurant', Transporte: 'directions_car', Compras: 'shopping_bag',
+            Servicios: 'receipt_long', Salud: 'medical_services', Entretenimiento: 'sports_esports',
+            Vivienda: 'home', Ocio: 'celebration', 'Nómina': 'payments', Otros: 'payments',
+        };
+
+        // Etiqueta de grupo (Hoy / Ayer / fecha corta).
+        function etiquetaFecha(iso) {
+            const d = new Date(iso); const hoy = new Date();
+            if (d.toDateString() === hoy.toDateString()) return 'Hoy';
+            if (new Date(hoy.getTime() - 86400000).toDateString() === d.toDateString()) return 'Ayer';
+            return d.toLocaleDateString('es-MX', { day: '2-digit', month: 'short' });
+        }
+        const hora = (iso) => new Date(iso).toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+
+        function itemHTML(t) {
+            const ingreso = t.tipo === 'ingreso';
+            const signo = ingreso ? '+ ' : '- ';
+            const colorMonto = ingreso ? 'text-primary' : 'text-on-surface-variant';
+            return `
+            <div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(37,99,235,0.03)] transition-all duration-300">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+                  <span class="material-symbols-outlined">${ICONO_CAT[t.categoria] || 'payments'}</span>
+                </div>
+                <div>
+                  <p class="font-headline-md text-headline-md text-on-surface text-[16px]">${t.descripcion}</p>
+                  <p class="font-label-sm text-label-sm text-outline">${hora(t.fecha)} • ${t.categoria}</p>
+                </div>
+              </div>
+              <p class="font-headline-md text-headline-md ${colorMonto}">${signo}${API.fmt(t.monto)}</p>
+            </div>`;
+        }
+
+        async function cargarHistorial(tipo = '') {
+            const cont = document.getElementById('hist-list');
+            const vacio = document.getElementById('hist-empty');
+            try {
+                const lista = await API.listTransacciones(tipo ? `?tipo=${tipo}` : '');
+                if (!lista.length) { cont.innerHTML = ''; vacio.classList.remove('hidden'); return; }
+                vacio.classList.add('hidden');
+                // Agrupa por etiqueta de fecha conservando el orden (ya viene desc).
+                const grupos = [];
+                for (const t of lista) {
+                    const k = etiquetaFecha(t.fecha);
+                    let g = grupos.find((x) => x.k === k);
+                    if (!g) { g = { k, items: [] }; grupos.push(g); }
+                    g.items.push(t);
+                }
+                cont.innerHTML = grupos.map((g) => `
+                  <section class="mb-8">
+                    <div class="flex items-center gap-4 mb-4">
+                      <h2 class="font-label-md text-label-md text-outline uppercase tracking-wider">${g.k}</h2>
+                      <div class="h-[1px] flex-grow bg-outline-variant/30"></div>
+                    </div>
+                    <div class="space-y-4">${g.items.map(itemHTML).join('')}</div>
+                  </section>`).join('');
+            } catch (err) {
+                cont.innerHTML = `<p class="text-center text-error py-10">${err.message}</p>`;
+            }
+        }
+
+        cargarHistorial();
+    </script>
+</body></html>

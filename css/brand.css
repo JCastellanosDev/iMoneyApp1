@@ -1,0 +1,24 @@
+/* ════════════════════════════════════════════════════════════════
+   Identidad de marca iMoney.
+   Fuente display "Space Grotesk" (moderna, geométrica, fintech) con
+   un degradado cian→azul a juego con el logo. Se aplica solo al
+   wordmark vía la clase .brand-name para no afectar al resto del texto.
+   ════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap');
+
+.brand-name {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  /* Degradado a juego con el logo (cian → azul). */
+  background: linear-gradient(120deg, #06b6d4 0%, #2563eb 60%, #1d4ed8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #2563eb; /* fallback si el navegador no soporta clip de texto */
+}
+
+/* La "i" inicial un pelín más ligera para un look de logotipo cuidado. */
+.brand-name .brand-i {
+  font-weight: 500;
+}

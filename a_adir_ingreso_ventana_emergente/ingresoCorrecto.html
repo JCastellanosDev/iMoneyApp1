@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico"/>
+<link rel="stylesheet" href="../css/brand.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"/>
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Confirmación de Ingreso - iMoney</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#001a42",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed-variant": "#004395",
+                    "inverse-primary": "#b4c5ff",
+                    "on-primary-container": "#eeefff",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-container": "#fefcff",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "background": "#f7f9fb",
+                    "surface-dim": "#d8dadc",
+                    "outline-variant": "#c3c6d7",
+                    "on-tertiary-fixed": "#001f26",
+                    "on-background": "#191c1e",
+                    "secondary-fixed": "#d8e2ff",
+                    "secondary-container": "#2170e4",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "primary": "#004ac6",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-container-high": "#e6e8ea",
+                    "primary-container": "#2563eb",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "surface": "#f7f9fb",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container": "#eceef0",
+                    "tertiary-fixed": "#acedff",
+                    "on-primary-fixed": "#00174b",
+                    "inverse-surface": "#2d3133",
+                    "tertiary": "#005e6e",
+                    "on-primary": "#ffffff",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "outline": "#737686",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "tertiary-container": "#00788c",
+                    "on-secondary": "#ffffff",
+                    "surface-tint": "#0053db",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f2f4f6",
+                    "on-surface-variant": "#434655",
+                    "error": "#ba1a1a",
+                    "secondary": "#0058be",
+                    "on-tertiary-container": "#d7f6ff",
+                    "surface-variant": "#e0e3e5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "base": "8px",
+                    "md": "24px",
+                    "sm": "12px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "xl": "64px",
+                    "margin-mobile": "20px",
+                    "lg": "40px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .success-glow {
+            box-shadow: 0 0 40px rgba(34, 197, 94, 0.2);
+        }
+        .confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation Anchor -->
+<header class="w-full top-0 sticky bg-background flex items-center justify-between px-margin-mobile py-sm z-50">
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity scale-95 active:transition-all" data-icon="close">close</button>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Confirmación</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-margin-mobile relative">
+<canvas class="confetti-canvas" id="confetti"></canvas>
+<!-- Success Identity Section -->
+<div class="flex flex-col items-center mb-lg relative z-10">
+<!-- Animated Success Icon -->
+<div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center success-glow mb-md transform transition-all duration-700 hover:scale-110">
+<span class="material-symbols-outlined text-white text-[48px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-center mb-xs">¡Ingreso Exitoso!</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-center opacity-80">Tu dinero ya está disponible en tu cuenta.</p>
+</div>
+<!-- Transaction Summary Card -->
+<div class="w-full max-w-md bg-white rounded-xl p-md shadow-[0_20px_40px_rgba(37,99,235,0.05)] relative z-10 mb-xl">
+<div class="space-y-sm">
+<div class="flex justify-between items-center py-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Importe</span>
+<span class="font-headline-md text-headline-md text-primary-container">$1,200.00</span>
+</div>
+<div class="h-[1px] bg-outline-variant opacity-30"></div>
+<div class="flex justify-between items-center py-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Concepto</span>
+<span class="font-body-md text-body-md text-on-surface font-medium">Sueldo Quincenal</span>
+</div>
+<div class="h-[1px] bg-outline-variant opacity-30"></div>
+<div class="flex justify-between items-center py-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">Fecha</span>
+<span class="font-body-md text-body-md text-on-surface">24 de Mayo, 2024</span>
+</div>
+<div class="h-[1px] bg-outline-variant opacity-30"></div>
+<div class="flex justify-between items-center py-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">ID Transacción</span>
+<span class="font-body-md text-body-md text-on-surface font-mono">#FF-98234-LX</span>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="w-full max-w-md flex flex-col gap-sm relative z-10">
+<button class="w-full bg-primary-container text-on-primary-container py-4 rounded-xl font-headline-md text-headline-md shadow-lg shadow-primary-container/20 hover:opacity-90 active:scale-95 transition-all">
+                Volver al Inicio
+            </button>
+<button class="w-full bg-secondary-fixed text-on-secondary-fixed-variant py-4 rounded-xl font-label-md text-label-md hover:bg-secondary-container hover:text-white transition-colors active:scale-95">
+                Ver detalles
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Shell (Suppressed contextually as this is a confirmation screen, but including BottomNavBar structure per JSON requirement if it were a top-level screen - per instructions, I suppress it here for transactional focus, but the JSON provides it) -->
+<!-- Suppression logic: This is a Success/Confirmation splash screen, so BottomNavBar is excluded to prioritize the confirmation message -->
+<script>
+        // Simple Confetti Micro-interaction
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height - canvas.height;
+                this.size = Math.random() * 8 + 4;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 + 2;
+                this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = Math.random() * 5;
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                this.rotation += this.rotationSpeed;
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 40; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Slow down and stop after a few seconds
+        setTimeout(() => {
+            particles = [];
+        }, 5000);
+    </script>
+    <script>
+        // Navegación de los botones de confirmación.
+        const DASHBOARD = '../index.html';
+        const HISTORIAL = '../historial_de_transacciones_finflow/historial.html';
+        document.querySelectorAll('button').forEach((b) => {
+            if (/volver al inicio/i.test(b.textContent)) b.onclick = () => (window.location.href = DASHBOARD);
+            if (/ver detalles/i.test(b.textContent)) b.onclick = () => (window.location.href = HISTORIAL);
+        });
+    </script>
+</body></html>

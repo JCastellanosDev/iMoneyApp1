@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<link rel="icon" type="image/x-icon" href="../img/favicon.ico"/>
+<link rel="stylesheet" href="../css/brand.css"/>
+<link rel="icon" type="image/png" sizes="32x32" href="../img/favicon-32.png"/>
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>iMoney - Wallet Modal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f7f9fb",
+                    "error-container": "#ffdad6",
+                    "secondary": "#0058be",
+                    "surface-container": "#eceef0",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#acedff",
+                    "outline-variant": "#c3c6d7",
+                    "on-background": "#191c1e",
+                    "secondary-fixed-dim": "#adc6ff",
+                    "inverse-on-surface": "#eff1f3",
+                    "on-secondary-container": "#fefcff",
+                    "surface-container-low": "#f2f4f6",
+                    "primary-container": "#2563eb",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#001a42",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "inverse-primary": "#b4c5ff",
+                    "on-tertiary-fixed": "#001f26",
+                    "surface-variant": "#e0e3e5",
+                    "on-secondary-fixed-variant": "#004395",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "background": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#005e6e",
+                    "surface-tint": "#0053db",
+                    "on-tertiary-fixed-variant": "#004e5c",
+                    "on-primary-container": "#eeefff",
+                    "tertiary-fixed-dim": "#4cd7f6",
+                    "on-tertiary-container": "#d7f6ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#00174b",
+                    "surface": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "on-surface-variant": "#434655",
+                    "on-surface": "#191c1e",
+                    "secondary-fixed": "#d8e2ff",
+                    "primary-fixed": "#dbe1ff",
+                    "surface-dim": "#d8dadc",
+                    "outline": "#737686",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#00788c",
+                    "secondary-container": "#2170e4",
+                    "primary": "#004ac6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "24px",
+                    "margin-mobile": "20px",
+                    "xl": "64px",
+                    "margin-desktop": "48px",
+                    "lg": "40px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "base": "8px",
+                    "sm": "12px"
+            },
+            "fontFamily": {
+                    "display": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .modal-blur {
+            backdrop-filter: blur(8px);
+            background-color: rgba(25, 28, 30, 0.4);
+        }
+        .sheet-transition {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bg-card-shadow {
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.08);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            overflow-x: hidden;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- Fondo decorativo sutil de marca (sin foto de stock) -->
+<div class="fixed inset-0 -z-10 pointer-events-none bg-gradient-to-b from-primary-fixed/40 via-background to-background"></div>
+<!-- TOP APP BAR -->
+<header class="w-full top-0 sticky flex justify-between items-center px-margin-mobile md:px-margin-desktop py-base bg-surface dark:bg-surface-dim z-30">
+<div class="flex items-center gap-3">
+<img src="../img/logo-sm.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
+<span class="brand-name text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed"><span class="brand-i">i</span>Money</span>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed cursor-pointer active:scale-95 transition-transform">notifications</button>
+</header>
+<!-- MAIN CONTENT AREA (MOCK) -->
+<main class="px-margin-mobile md:px-margin-desktop py-lg space-y-md pb-32">
+<div class="space-y-base">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface" id="w-greeting">Hola</h1>
+<p class="text-body-md font-body-md text-on-surface-variant">Tu resumen financiero de hoy.</p>
+</div>
+<!-- Resumen real de la cartera -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Saldo (tarjeta hero con degradado de marca) -->
+<div class="md:col-span-2 rounded-xl p-md text-white flex flex-col justify-between min-h-[180px] shadow-[0_12px_30px_rgba(37,99,235,0.18)]" style="background:linear-gradient(120deg,#06b6d4 0%,#2563eb 60%,#1d4ed8 100%)">
+<div>
+<p class="font-label-sm text-label-sm opacity-80 uppercase tracking-wider">Saldo disponible</p>
+<h2 class="text-display font-display mt-xs" id="w-balance">$0.00</h2>
+</div>
+<div class="flex gap-lg mt-md">
+<div>
+<p class="font-label-sm text-label-sm opacity-80 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">south_west</span>Ingresos</p>
+<p class="font-headline-md font-bold" id="w-ingresos">$0.00</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm opacity-80 flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">north_east</span>Gastado</p>
+<p class="font-headline-md font-bold" id="w-gastado">$0.00</p>
+</div>
+</div>
+</div>
+<!-- Ahorros + acción rápida -->
+<div class="bg-surface-container-lowest p-md rounded-xl bg-card-shadow flex flex-col justify-between gap-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary"><span class="material-symbols-outlined">savings</span></div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ahorros</p>
+<p class="font-headline-md font-bold text-on-surface" id="w-ahorros">$0.00</p>
+</div>
+</div>
+<button id="w-open-manage" class="w-full py-sm bg-primary text-on-primary rounded-full font-label-md flex items-center justify-center gap-2 active:scale-95 transition-transform"><span class="material-symbols-outlined text-[18px]">add</span> Registrar movimiento</button>
+</div>
+</div>
+<!-- Movimientos recientes -->
+<div class="bg-surface-container-lowest rounded-xl bg-card-shadow p-md">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-md text-headline-md text-on-surface">Movimientos recientes</h3>
+<a class="text-primary font-label-md text-label-md hover:underline" href="../historial_de_transacciones_finflow/historial.html">Ver todos</a>
+</div>
+<div class="space-y-base" id="w-recientes"></div>
+</div>
+</main>
+<!-- MODAL OVERLAY -->
+<div class="fixed inset-0 z-40 modal-blur flex items-end justify-center transition-opacity duration-300" id="modalOverlay">
+<!-- BOTTOM SHEET -->
+<div class="w-full max-w-2xl bg-surface-container-lowest rounded-t-[32px] p-xl sheet-transition transform translate-y-0 relative shadow-[0_-10px_40px_rgba(0,0,0,0.1)]" id="bottomSheet">
+<!-- Handle -->
+<div class="absolute top-4 left-1/2 -translate-x-1/2 w-12 h-1.5 bg-outline-variant/30 rounded-full"></div>
+<div class="flex flex-col items-center text-center space-y-lg">
+<div class="space-y-base">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background">Gestionar Cartera</h2>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-sm">Selecciona el tipo de transacción que deseas registrar hoy.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-md w-full">
+<!-- Action: Add Expense -->
+<button type="button" onclick="window.location.href='../a_adir_gasto_con_escaneo_de_ticket/añadirGasto.html'" class="group flex flex-col items-center justify-center p-xl rounded-xl bg-surface-container-low hover:bg-error-container transition-all duration-300 border border-transparent hover:border-error/20 active:scale-95">
+<div class="w-16 h-16 rounded-full bg-error text-on-error flex items-center justify-center mb-md shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">arrow_downward</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-background">Añadir Gasto</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-xs">Pagos, compras, retiros</span>
+</button>
+<!-- Action: Add Income -->
+<button type="button" onclick="window.location.href='../a_adir_ingreso_ventana_emergente/agregarIngreso.html'" class="group flex flex-col items-center justify-center p-xl rounded-xl bg-surface-container-low hover:bg-secondary-fixed transition-all duration-300 border border-transparent hover:border-secondary/20 active:scale-95">
+<div class="w-16 h-16 rounded-full bg-secondary text-on-secondary flex items-center justify-center mb-md shadow-lg group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">arrow_upward</span>
+</div>
+<span class="font-headline-md text-headline-md text-on-background">Añadir Ingreso</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant mt-xs">Salario, bonos, ventas</span>
+</button>
+</div>
+<button class="mt-md text-label-md font-label-md text-outline hover:text-on-surface transition-colors px-md py-base" id="closeModal">
+                    Tal vez más tarde
+                </button>
+</div>
+</div>
+</div>
+<!-- BOTTOM NAV BAR -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 py-3 bg-surface dark:bg-surface-container-highest shadow-[0_-4px_20px_rgba(37,99,235,0.05)] z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container rounded-full px-4 py-1 transition-all" href="../index.html">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 active:scale-90 transition-all duration-200" href="../cartera/ingresoYGasto.html">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="font-label-sm text-label-sm">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container rounded-full px-4 py-1 transition-all" href="../historial_de_transacciones_finflow/historial.html">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-70 hover:bg-surface-container-high dark:hover:bg-surface-container rounded-full px-4 py-1 transition-all" href="../ajustes_finflow/ajustes.html">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        const modalOverlay = document.getElementById('modalOverlay');
+        const bottomSheet = document.getElementById('bottomSheet');
+        const closeModal = document.getElementById('closeModal');
+
+        function toggleModal(show) {
+            if (show) {
+                modalOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                bottomSheet.classList.remove('translate-y-full');
+            } else {
+                modalOverlay.classList.add('opacity-0', 'pointer-events-none');
+                bottomSheet.classList.add('translate-y-full');
+            }
+        }
+
+        // Close on overlay click
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) toggleModal(false);
+        });
+
+        closeModal.addEventListener('click', () => toggleModal(false));
+
+        // Interaction for buttons to simulate closing after action
+        document.querySelectorAll('.group').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.add('scale-95');
+                setTimeout(() => {
+                    btn.classList.remove('scale-95');
+                    toggleModal(false);
+                }, 150);
+            });
+        });
+
+        // Arranca CERRADO: primero se ve la cartera real; el modal se abre
+        // con el botón "Registrar movimiento".
+        modalOverlay.classList.add('transition-opacity');
+        toggleModal(false);
+    </script>
+    <script src="../js/api.js"></script>
+    <script>
+        API.requireSession('../login_compacto_gesti_n_de_ahorro/inicioSesion.html');
+        const u = API.getUser();
+        if (u) document.getElementById('w-greeting').textContent = 'Hola, ' + (u.nombre || '').split(' ')[0];
+
+        const ICONO_CAT = {
+            Comida: 'restaurant', Transporte: 'directions_car', Compras: 'shopping_bag',
+            Servicios: 'receipt_long', Salud: 'medical_services', Entretenimiento: 'sports_esports',
+            Vivienda: 'home', Ocio: 'celebration', 'Nómina': 'payments', Otros: 'payments',
+        };
+        const fechaCorta = (iso) => {
+            const d = new Date(iso), hoy = new Date();
+            const h = d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
+            if (d.toDateString() === hoy.toDateString()) return 'Hoy, ' + h;
+            if (new Date(hoy.getTime() - 86400000).toDateString() === d.toDateString()) return 'Ayer, ' + h;
+            return d.toLocaleDateString('es-MX', { day: '2-digit', month: 'short' });
+        };
+
+        API.dashboard()
+            .then((d) => {
+                document.getElementById('w-balance').textContent = API.fmt(d.disponible);
+                document.getElementById('w-ingresos').textContent = API.fmt(d.ingresos);
+                document.getElementById('w-gastado').textContent = API.fmt(d.gastado);
+                document.getElementById('w-ahorros').textContent = API.fmt(d.ahorros.actual);
+                const cont = document.getElementById('w-recientes');
+                if (!d.recientes.length) {
+                    cont.innerHTML = '<p class="text-label-sm text-on-surface-variant">Sin movimientos aún.</p>';
+                    return;
+                }
+                cont.innerHTML = d.recientes.map((t) => {
+                    const ingreso = t.tipo === 'ingreso';
+                    return `
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-sm">
+                        <div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
+                          <span class="material-symbols-outlined">${ICONO_CAT[t.categoria] || 'payments'}</span>
+                        </div>
+                        <div>
+                          <p class="font-body-md text-on-surface font-semibold">${t.descripcion}</p>
+                          <p class="font-label-sm text-label-sm text-on-surface-variant">${fechaCorta(t.fecha)} · ${t.categoria}</p>
+                        </div>
+                      </div>
+                      <p class="font-body-md font-bold ${ingreso ? 'text-primary' : 'text-on-surface'}">${ingreso ? '+' : '-'}${API.fmt(t.monto)}</p>
+                    </div>`;
+                }).join('');
+            })
+            .catch((e) => console.error(e));
+
+        // Botón "Registrar movimiento" reabre el modal de gestión.
+        document.getElementById('w-open-manage').addEventListener('click', () => toggleModal(true));
+    </script>
+</body></html>
