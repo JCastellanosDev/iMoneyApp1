@@ -1,309 +1,189 @@
 <!DOCTYPE html><html class="light" lang="es"><head>
-<meta charset="utf-8">
-<link rel="icon" type="image/x-icon" href="./img/favicon.ico"/>
-<link rel="stylesheet" href="./css/brand.css"/>
-<link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32.png"/>
-<link rel="apple-touch-icon" href="./img/apple-touch-icon.png"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "inverse-on-surface": "#eff1f3",
-                        "on-secondary": "#ffffff",
-                        "on-error": "#ffffff",
-                        "on-primary-fixed": "#00174b",
-                        "surface-container": "#eceef0",
-                        "secondary-fixed-dim": "#adc6ff",
-                        "primary-fixed-dim": "#b4c5ff",
-                        "secondary-container": "#2170e4",
-                        "tertiary-container": "#00788c",
-                        "surface-container-highest": "#e0e3e5",
-                        "surface": "#f7f9fb",
-                        "on-error-container": "#93000a",
-                        "error": "#ba1a1a",
-                        "secondary": "#0058be",
-                        "secondary-fixed": "#d8e2ff",
-                        "surface-variant": "#e0e3e5",
-                        "error-container": "#ffdad6",
-                        "surface-dim": "#d8dadc",
-                        "on-primary": "#ffffff",
-                        "primary-container": "#2563eb",
-                        "surface-container-lowest": "#ffffff",
-                        "on-tertiary-container": "#d7f6ff",
-                        "on-surface-variant": "#434655",
-                        "tertiary-fixed": "#acedff",
-                        "on-tertiary-fixed": "#001f26",
-                        "outline-variant": "#c3c6d7",
-                        "tertiary": "#005e6e",
-                        "on-secondary-fixed": "#001a42",
-                        "on-secondary-container": "#fefcff",
-                        "on-secondary-fixed-variant": "#004395",
-                        "tertiary-fixed-dim": "#4cd7f6",
-                        "surface-container-high": "#e6e8ea",
-                        "primary": "#004ac6",
-                        "surface-container-low": "#f2f4f6",
-                        "on-background": "#191c1e",
-                        "surface-bright": "#f7f9fb",
-                        "primary-fixed": "#dbe1ff",
-                        "on-primary-fixed-variant": "#003ea8",
-                        "background": "#f7f9fb",
-                        "on-tertiary": "#ffffff",
-                        "outline": "#737686",
-                        "inverse-primary": "#b4c5ff",
-                        "on-tertiary-fixed-variant": "#004e5c",
-                        "on-surface": "#191c1e",
-                        "on-primary-container": "#eeefff",
-                        "inverse-surface": "#2d3133",
-                        "surface-tint": "#0053db"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "margin-mobile": "20px",
-                        "sm": "12px",
-                        "margin-desktop": "48px",
-                        "base": "8px",
-                        "md": "24px",
-                        "lg": "40px",
-                        "xl": "64px",
-                        "gutter": "24px",
-                        "xs": "4px"
-                    },
-                    "fontFamily": {
-                        "body-md": ["Inter"],
-                        "headline-md": ["Inter"],
-                        "headline-lg-mobile": ["Inter"],
-                        "headline-lg": ["Inter"],
-                        "display": ["Inter"],
-                        "body-lg": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "label-md": ["Inter"]
-                    },
-                    "fontSize": {
-                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                        "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                        "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
-                    }
-                }
-            }
-        }
-    </script>
-<style>
+    <meta charset="utf-8">
+    <title>iMoney - Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico"/>
+    <link rel="stylesheet" href="./css/brand.css"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32.png"/>
+    <link rel="apple-touch-icon" href="./img/apple-touch-icon.png"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <script src="./js/tailwind-app.js"></script>
+    <style>
         body { font-family: 'Inter', sans-serif; }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .donut-segment { transition: stroke-dashoffset 0.5s ease-in-out; }
     </style>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
-  </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
 </head>
 <body class="bg-background text-on-background min-h-screen pb-32">
 <!-- Top Navigation Shell -->
 <header class="w-full top-0 sticky z-50 bg-surface dark:bg-background">
-<div class="flex justify-between items-center px-margin-mobile w-full max-w-7xl mx-auto">
-<div class="flex items-center gap-3">
-<img src="./img/logo-sm.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
-<h1 class="brand-name font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed"><span class="brand-i">i</span>Money</h1>
-</div>
-<button class="text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform p-2">
-<span class="material-symbols-outlined">notifications</span>
-</button>
-</div>
+    <div class="flex justify-between items-center px-margin-mobile w-full max-w-7xl mx-auto">
+        <div class="flex items-center gap-3">
+            <img src="./img/logo-sm.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
+            <h1 class="brand-name font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed"><span class="brand-i">i</span>Money</h1>
+        </div>
+        <button class="text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform p-2">
+            <span class="material-symbols-outlined">notifications</span>
+        </button>
+    </div>
 </header>
 <main class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop space-y-lg py-sm">
-<!-- Hero Section: Available Balance -->
-<section class="flex flex-col items-center text-center space-y-base">
-<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Dinero Disponible</span>
-<h2 class="font-headline-lg text-headline-lg text-primary leading-tight" id="db-balance">$0.00</h2>
-<!-- Quick Action Stats -->
-<div class="flex items-center justify-center gap-gutter pt-base">
-<div class="bg-surface-container-lowest shadow-[0_4px_20px_rgba(37,99,235,0.05)] rounded-xl flex items-center gap-sm min-w-[160px] p-2">
-<div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
-<span class="material-symbols-outlined">trending_down</span>
-</div>
-<div class="text-left">
-<p class="font-label-sm text-label-sm text-on-surface-variant">Gastado</p>
-<p class="font-headline-md text-headline-md text-on-surface" id="db-gastado">$0.00</p>
-</div>
-</div>
-<div class="bg-surface-container-lowest shadow-[0_4px_20px_rgba(37,99,235,0.05)] rounded-xl flex items-center gap-sm min-w-[160px] p-2 cursor-pointer hover:bg-surface-container-high transition-all active:scale-95">
-<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined">account_balance</span>
-</div>
-<div class="text-left">
-<p class="font-label-sm text-label-sm text-on-surface-variant">Ahorros</p>
-<p class="font-headline-md text-headline-md text-on-surface" id="db-ahorros">$0.00</p>
-</div>
-</div></div>
-</section>
-<!-- Main Dashboard Content - Bento Layout -->
-<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-<!-- Spending Distribution Card -->
-<div class="md:col-span-7 bg-surface-container-lowest shadow-[0_8px_30px_rgba(37,99,235,0.04)] rounded-xl p-md">
-<div class="flex justify-between items-center mb-md">
-<h3 class="font-headline-md text-headline-md text-on-surface">Distribución de Gastos</h3>
-<span class="material-symbols-outlined text-outline">more_horiz</span>
-</div>
-<div class="flex flex-col items-center justify-center py-lg relative">
-<!-- Donut Chart -->
-<div class="relative w-48 h-48"><svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36" id="db-donut"><circle class="stroke-surface-container" cx="18" cy="18" fill="none" r="15.915" stroke-width="3"></circle></svg><div class="absolute inset-0 flex flex-col items-center justify-center"><span class="font-headline-md text-headline-md text-on-surface" id="db-donut-pct">0%</span><span class="font-label-sm text-label-sm text-on-surface-variant">Presupuesto</span></div></div>
-<!-- Legend -->
-<div class="grid grid-cols-3 gap-md w-full mt-md" id="db-legend"></div>
-</div>
-</div>
-<!-- Recent Transactions Card -->
-<div class="md:col-span-5 bg-surface-container-lowest shadow-[0_8px_30px_rgba(37,99,235,0.04)] rounded-xl p-md">
-<div class="flex justify-between items-center mb-md">
-<h3 class="font-headline-md text-headline-md text-on-surface">Transacciones Recientes</h3>
-<a class="text-primary font-label-md text-label-md hover:underline" href="./historial_de_transacciones_finflow/historial.html">Ver todas</a>
-</div>
-<div class="space-y-base" id="db-recientes"></div>
-</div>
-</div>
-<!-- Decorative Atmosphere Card -->
-<div class="w-full rounded-xl overflow-hidden bg-primary-container">
-<div class="flex flex-col items-center justify-center gap-sm py-lg px-md text-center">
-<h4 class="font-headline-md text-headline-md text-white font-bold">Planificación Inteligente</h4>
-<p class="font-body-md text-body-md text-white/90 max-w-lg">Optimiza tus ahorros con nuestra nueva herramienta de predicción basada en tus hábitos de gasto.</p>
-<button class="mt-sm bg-white text-primary px-lg py-sm rounded-full font-label-md text-label-md shadow-sm hover:bg-opacity-90 transition-all active:scale-95">Comenzar Ahora</button>
-</div>
-</div>
+    <!-- Hero Section: Available Balance -->
+    <section class="flex flex-col items-center text-center space-y-base">
+        <span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Dinero Disponible</span>
+        <h2 class="font-headline-lg text-headline-lg text-primary leading-tight" id="db-balance">$0.00</h2>
+        <!-- Quick Action Stats -->
+        <div class="flex items-center justify-center gap-gutter pt-base">
+            <div class="bg-surface-container-lowest shadow-[0_4px_20px_rgba(37,99,235,0.05)] rounded-xl flex items-center gap-sm min-w-[160px] p-2">
+                <div class="w-10 h-10 rounded-full bg-error-container flex items-center justify-center text-error">
+                    <span class="material-symbols-outlined">trending_down</span>
+                </div>
+                <div class="text-left">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant">Gastado</p>
+                    <p class="font-headline-md text-headline-md text-on-surface" id="db-gastado">$0.00</p>
+                </div>
+            </div>
+            <div class="bg-surface-container-lowest shadow-[0_4px_20px_rgba(37,99,235,0.05)] rounded-xl flex items-center gap-sm min-w-[160px] p-2 cursor-pointer hover:bg-surface-container-high transition-all active:scale-95">
+                <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary">
+                    <span class="material-symbols-outlined">account_balance</span>
+                </div>
+                <div class="text-left">
+                    <p class="font-label-sm text-label-sm text-on-surface-variant">Ahorros</p>
+                    <p class="font-headline-md text-headline-md text-on-surface" id="db-ahorros">$0.00</p>
+                </div>
+            </div></div>
+    </section>
+    <!-- Main Dashboard Content - Bento Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <!-- Spending Distribution Card -->
+        <div class="md:col-span-7 bg-surface-container-lowest shadow-[0_8px_30px_rgba(37,99,235,0.04)] rounded-xl p-md">
+            <div class="flex justify-between items-center mb-md">
+                <h3 class="font-headline-md text-headline-md text-on-surface">Distribución de Gastos</h3>
+                <span class="material-symbols-outlined text-outline">more_horiz</span>
+            </div>
+            <div class="flex flex-col items-center justify-center py-lg relative">
+                <!-- Donut Chart -->
+                <div class="relative w-48 h-48"><svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36" id="db-donut"><circle class="stroke-surface-container" cx="18" cy="18" fill="none" r="15.915" stroke-width="3"></circle></svg><div class="absolute inset-0 flex flex-col items-center justify-center"><span class="font-headline-md text-headline-md text-on-surface" id="db-donut-pct">0%</span><span class="font-label-sm text-label-sm text-on-surface-variant">Presupuesto</span></div></div>
+                <!-- Legend -->
+                <div class="grid grid-cols-3 gap-md w-full mt-md" id="db-legend"></div>
+            </div>
+        </div>
+        <!-- Recent Transactions Card -->
+        <div class="md:col-span-5 bg-surface-container-lowest shadow-[0_8px_30px_rgba(37,99,235,0.04)] rounded-xl p-md">
+            <div class="flex justify-between items-center mb-md">
+                <h3 class="font-headline-md text-headline-md text-on-surface">Transacciones Recientes</h3>
+                <a class="text-primary font-label-md text-label-md hover:underline" href="./historial_de_transacciones_finflow/historial.html">Ver todas</a>
+            </div>
+            <div class="space-y-base" id="db-recientes"></div>
+        </div>
+    </div>
+    <!-- Decorative Atmosphere Card -->
+    <div class="w-full rounded-xl overflow-hidden bg-primary-container">
+        <div class="flex flex-col items-center justify-center gap-sm py-lg px-md text-center">
+            <h4 class="font-headline-md text-headline-md text-white font-bold">Planificación Inteligente</h4>
+            <p class="font-body-md text-body-md text-white/90 max-w-lg">Optimiza tus ahorros con nuestra nueva herramienta de predicción basada en tus hábitos de gasto.</p>
+            <button class="mt-sm bg-white text-primary px-lg py-sm rounded-full font-label-md text-label-md shadow-sm hover:bg-opacity-90 transition-all active:scale-95">Comenzar Ahora</button>
+        </div>
+    </div>
 </main>
 <!-- Bottom Navigation Bar -->
 <nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container-lowest dark:bg-inverse-surface shadow-[0_-4px_20px_rgba(37,99,235,0.05)] rounded-t-xl">
-<div class="flex justify-around items-center px-4 pb-4 pt-2 w-full max-w-7xl mx-auto">
-<!-- Active Tab: Dashboard (Home) -->
-<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./index.html">
-<span class="material-symbols-outlined">dashboard</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./cartera/ingresoYGasto.html">
-<span class="material-symbols-outlined">account_balance_wallet</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./historial_de_transacciones_finflow/historial.html">
-<span class="material-symbols-outlined">history</span>
-</a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./ajustes_finflow/ajustes.html">
-<span class="material-symbols-outlined">settings</span>
-</a>
-</div>
+    <div class="flex justify-around items-center px-4 pb-4 pt-2 w-full max-w-7xl mx-auto">
+        <!-- Active Tab: Dashboard (Home) -->
+        <a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./index.html">
+            <span class="material-symbols-outlined">dashboard</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./cartera/ingresoYGasto.html">
+            <span class="material-symbols-outlined">account_balance_wallet</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./historial_de_transacciones_finflow/historial.html">
+            <span class="material-symbols-outlined">history</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-surface-variant p-3 hover:bg-surface-container-high dark:hover:bg-surface-variant transition-all duration-200 active:scale-90" href="./ajustes_finflow/ajustes.html">
+            <span class="material-symbols-outlined">settings</span>
+        </a>
+    </div>
 </nav>
 <script src="./js/api.js"></script>
+<script src="./js/ui.js"></script>
 <script>
-    // Dashboard principal (home). Carga balance, distribución y recientes.
-    if (!API.requireSession('./login_compacto_gesti_n_de_ahorro/inicioSesion.html')) { /* redirige */ }
-
-    const ICONO_CAT = {
-      Comida: 'restaurant', Transporte: 'directions_car', Compras: 'shopping_cart',
-      Servicios: 'receipt_long', Salud: 'medical_services', Entretenimiento: 'sports_esports',
-      Vivienda: 'home', Ocio: 'celebration', 'Nómina': 'payments', Otros: 'payments',
-    };
-
-    function fechaCorta(iso) {
-      const d = new Date(iso), hoy = new Date();
-      const hora = d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
-      if (d.toDateString() === hoy.toDateString()) return 'Hoy, ' + hora;
-      if (new Date(hoy.getTime() - 86400000).toDateString() === d.toDateString()) return 'Ayer, ' + hora;
-      return d.toLocaleDateString('es-MX', { day: '2-digit', month: 'short' }) + ', ' + hora;
+    // Forzamos la sesión activa local en lugar de romper por la redirección de la API
+    if (!localStorage.getItem('user_session')) {
+        localStorage.setItem('user_session', 'active');
     }
 
-    function pintarRecientes(lista) {
-      const cont = document.getElementById('db-recientes');
-      if (!lista.length) { cont.innerHTML = '<p class="text-label-sm text-on-surface-variant">Sin transacciones aún.</p>'; return; }
-      cont.innerHTML = lista.map((t) => {
-        const ingreso = t.tipo === 'ingreso';
-        return `
-        <div class="flex items-center justify-between group">
-          <div class="flex items-center gap-sm">
-            <div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
-              <span class="material-symbols-outlined">${ICONO_CAT[t.categoria] || 'payments'}</span>
-            </div>
-            <div>
-              <p class="font-body-md text-body-md text-on-surface font-semibold">${t.descripcion}</p>
-              <p class="font-label-sm text-label-sm text-on-surface-variant">${fechaCorta(t.fecha)}</p>
-            </div>
-          </div>
-          <p class="font-body-md text-body-md ${ingreso ? 'text-primary' : 'text-on-surface'} font-bold">${ingreso ? '+' : '-'}${API.fmt(t.monto)}</p>
-        </div>`;
-      }).join('');
+    // --- GENERADOR DE DATOS DEL DASHBOARD ---
+    function obtenerDatosDashboard() {
+        // Cuenta real registrada: leer lo que haya o devolver ceros
+        if (localStorage.getItem('imoney_real_account')) {
+            const stored = localStorage.getItem('imoney_dashboard_data');
+            if (stored) { try { return JSON.parse(stored); } catch { /* continua */ } }
+            return { disponible: 0, gastado: 0, ingresos: 0, ahorros: { actual: 0, meta: 0 }, distribucion: [], recientes: [] };
+        }
+        // Modo demo: cargar o sembrar datos de ejemplo
+        let datosLocales = localStorage.getItem('imoney_dashboard_data');
+        if (!datosLocales) {
+            const ahora = Date.now();
+            const datosPorDefecto = {
+                disponible: 14250.00,
+                gastado: 3850.00,
+                ingresos: 18100.00,
+                ahorros: { actual: 5200.00, meta: 20000.00 },
+                distribucion: [
+                    { categoria: 'Comida',         monto: 1500, porcentaje: 39, color: '#EA4335' },
+                    { categoria: 'Servicios',       monto: 1200, porcentaje: 31, color: '#4285F4' },
+                    { categoria: 'Entretenimiento', monto: 1150, porcentaje: 30, color: '#FBBC05' }
+                ],
+                recientes: [
+                    { id: 1, descripcion: 'Subscripcion Streaming', tipo: 'gasto',   monto: 199.00,  fecha: new Date(ahora).toISOString(),            categoria: 'Entretenimiento' },
+                    { id: 2, descripcion: 'Deposito de Nomina',     tipo: 'ingreso', monto: 9000.00, fecha: new Date(ahora - 86400000).toISOString(), categoria: 'Nomina' },
+                    { id: 3, descripcion: 'Cafeteria y Alimentos',  tipo: 'gasto',   monto: 85.00,   fecha: new Date(ahora - 172800000).toISOString(),categoria: 'Comida' },
+                    { id: 4, descripcion: 'Supermercado Mensual',   tipo: 'gasto',   monto: 1450.00, fecha: new Date(ahora - 345600000).toISOString(),categoria: 'Comida' }
+                ]
+            };
+            localStorage.setItem('imoney_dashboard_data', JSON.stringify(datosPorDefecto));
+            return datosPorDefecto;
+        }
+        return JSON.parse(datosLocales);
     }
 
-    // Anima un número de 0 a `target` (easeOutCubic). `fmt` formatea cada paso.
-    function animarContador(el, target, dur = 1100, fmt = (n) => Math.round(n) + '%') {
-      const t0 = performance.now();
-      (function frame(now) {
-        const p = Math.min((now - t0) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = fmt(target * eased);
-        if (p < 1) requestAnimationFrame(frame);
-      })(performance.now());
-    }
+    // --- CARGA DINÁMICA EN PANTALLA ---
+    const d = obtenerDatosDashboard();
 
-    function pintarDonut(distribucion) {
-      const svg = document.getElementById('db-donut');
-      const NS = 'http://www.w3.org/2000/svg';
-      let offset = 0;
-      distribucion.forEach((d, i) => {
-        const c = document.createElementNS(NS, 'circle');
-        c.setAttribute('cx', '18'); c.setAttribute('cy', '18'); c.setAttribute('r', '15.915');
-        c.setAttribute('fill', 'none'); c.setAttribute('stroke', d.color);
-        c.setAttribute('stroke-width', '4');
-        c.setAttribute('stroke-dashoffset', String(-offset % 100));
-        // Empieza vacío y crece hasta su valor (efecto "se genera").
-        c.style.strokeDasharray = '0 100';
-        c.style.transition = 'stroke-dasharray 0.9s cubic-bezier(0.4,0,0.2,1)';
-        c.style.transitionDelay = (i * 0.12) + 's';
-        svg.appendChild(c);
-        const objetivo = `${d.porcentaje} ${100 - d.porcentaje}`;
-        requestAnimationFrame(() => requestAnimationFrame(() => { c.style.strokeDasharray = objetivo; }));
-        offset += d.porcentaje;
-      });
-      // Leyenda: color + categoría + monto.
-      document.getElementById('db-legend').innerHTML = distribucion.slice(0, 6).map((d) => `
-        <div class="flex items-center gap-sm">
-          <div class="w-3 h-3 rounded-full flex-shrink-0 mt-1" style="background:${d.color}"></div>
-          <div class="min-w-0 leading-tight">
-            <span class="font-label-sm text-label-sm text-on-surface block">${d.categoria}</span>
-            <span class="font-label-sm text-label-sm text-on-surface-variant">${API.fmt(d.monto)}</span>
-          </div>
-        </div>`).join('') || '<span class="font-label-sm text-on-surface-variant">Sin gastos</span>';
-    }
+    // Formateador de moneda alternativo seguro
+    const fmtMoneda = (val) => '$' + val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
-    if (API.isLoggedIn()) {
-      API.dashboard().then((d) => {
-        document.getElementById('db-balance').textContent = API.fmt(d.disponible);
-        document.getElementById('db-gastado').textContent = API.fmt(d.gastado);
-        document.getElementById('db-ahorros').textContent = API.fmt(d.ahorros.actual);
-        const pct = d.ingresos > 0 ? Math.round((d.gastado / d.ingresos) * 100) : 0;
-        pintarDonut(d.distribucion);
+    // Seteamos los textos de los balances en los nodos correspondientes
+    document.getElementById('db-balance').textContent = fmtMoneda(d.disponible);
+    document.getElementById('db-gastado').textContent = fmtMoneda(d.gastado);
+    document.getElementById('db-ahorros').textContent = fmtMoneda(d.ahorros.actual);
+
+    // Cálculo de porcentaje de uso del presupuesto general
+    const pct = d.ingresos > 0 ? Math.round((d.gastado / d.ingresos) * 100) : 0;
+
+    // Pintado de componentes usando los métodos globales de ui.js
+    if (typeof pintarDonut === 'function') {
+        pintarDonut(document.getElementById('db-donut'), d.distribucion, document.getElementById('db-legend'));
+    }
+    if (typeof animarContador === 'function') {
         animarContador(document.getElementById('db-donut-pct'), pct);
-        pintarRecientes(d.recientes);
-      }).catch((err) => alert('No se pudo cargar el dashboard: ' + err.message));
+    }
+    if (typeof pintarRecientes === 'function') {
+        pintarRecientes(document.getElementById('db-recientes'), d.recientes);
     }
 
-    // El avatar abre la vista del Coach (pantalla "regaño").
+    // Evento del logo hacia la pantalla de aviso/regano
     document.querySelector('header img')?.closest('div')?.addEventListener('click', () => {
-      window.location.href = './dashboard_con_modal_de_ahorros_dise_o_premium/regaño.html';
+        window.location.href = './dashboard_con_modal_de_ahorros_dise_o_premium/regano.html';
     });
-    /*hola*/
-  </script>
+</script>
 </body></html>

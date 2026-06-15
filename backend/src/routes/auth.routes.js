@@ -14,6 +14,7 @@ import rateLimit from "express-rate-limit";
 import { ok, fail, asyncHandler } from "../http.js";
 import { usuarios, generarId } from "../store.js";
 import { firmarToken, usuarioPublico, requireAuth } from "../auth.js";
+import { limpiar } from "../utils.js";
 
 const router = Router();
 
@@ -26,13 +27,8 @@ const limiterAuth = rateLimit({
   message: { success: false, error: "DEMASIADOS_INTENTOS", message: "Demasiados intentos. Espera 15 minutos." },
 });
 
-// ── Utilidades de validación y limpieza ──────────────────────────
+// ── Utilidades de validación ──────────────────────────────────────
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-function limpiar(val, max = 200) {
-  // Elimina etiquetas HTML y recorta espacios para evitar XSS en campos de texto.
-  return String(val || "").replace(/<[^>]*>/g, "").trim().slice(0, max);
-}
 
 function validarEmail(email) {
   return EMAIL_RE.test(String(email || "").trim().toLowerCase());
@@ -69,7 +65,7 @@ router.post(
       return fail(res, 422, "EMAIL_INVALIDO", "El formato del correo no es válido");
     }
     if (String(password).length < 8) {
-      return fail(res, 422, "PASSWORD_CORTO", "La contraseña debe tener al menos 8 caracteres");
+      return fail(res, 422, "PASSWORD_CORTO", "La contrasena debe tener al menos 8 caracteres");
     }
     if (await usuarios.porEmail(email)) {
       return fail(res, 409, "EMAIL_EN_USO", "Ya existe una cuenta con ese correo");
@@ -94,7 +90,7 @@ router.post(
     }
     if (!validarEmail(email)) {
       // Respuesta genérica para no revelar si el email existe o no.
-      return fail(res, 401, "CREDENCIALES_INVALIDAS", "Correo o contraseña incorrectos");
+      return fail(res, 401, "CREDENCIALES_INVALIDAS", "Correo o contrasena incorrectos");
     }
 
     const usuario = await usuarios.porEmail(email);
@@ -103,7 +99,7 @@ router.post(
     const coincide = await bcrypt.compare(password, usuario?.passwordHash || hashFalso);
 
     if (!usuario || !usuario.passwordHash || !coincide) {
-      return fail(res, 401, "CREDENCIALES_INVALIDAS", "Correo o contraseña incorrectos");
+      return fail(res, 401, "CREDENCIALES_INVALIDAS", "Correo o contrasena incorrectos");
     }
 
     const token = firmarToken(usuario);

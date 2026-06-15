@@ -8,6 +8,7 @@
 // ════════════════════════════════════════════════════════════════
 import { Router } from "express";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import rateLimit from "express-rate-limit";
 import { ok, fail, asyncHandler } from "../http.js";
 import { requireAuth } from "../auth.js";
 import { calcularResumen } from "../resumen.js";
@@ -17,8 +18,16 @@ const router = Router();
 
 const API_KEY = process.env.GEMINI_API_KEY;
 const genAI = API_KEY ? new GoogleGenerativeAI(API_KEY) : null;
-// Alias estable de Gemini; sobreescribible con GEMINI_MODEL si hace falta.
-const MODELO = process.env.GEMINI_MODEL || "gemini-flash-latest";
+const MODELO = process.env.GEMINI_MODEL || "gemini-2.5-flash-lite";
+
+// IA endpoints are expensive (Gemini API + large payloads) — rate-limit strictly.
+const limiterIA = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { success: false, error: "RATE_LIMIT", message: "Demasiadas solicitudes de IA. Espera un momento." },
+});
 
 // Intenta parsear JSON aunque venga envuelto en texto o markdown.
 function parsearJson(texto) {
@@ -56,6 +65,7 @@ Si la imagen no es un ticket legible, devuelve total 0 y categoria "Otros".`;
 
 router.post(
   "/leer-ticket",
+  limiterIA,
   requireAuth,
   asyncHandler(async (req, res) => {
     const { imageBase64, mediaType } = req.body || {};
@@ -96,10 +106,11 @@ router.post(
 // ── Coach financiero ──────────────────────────────────────────────
 const SISTEMA_COACH = `Eres un coach financiero personal mexicano, cercano y motivador.
 Hablas claro, sin tecnicismos, y das consejos concretos y accionables.
-Usas pesos mexicanos (MXN). No regañas: animas.`;
+Usas pesos mexicanos (MXN). No reganas: animas.`;
 
 router.post(
   "/coach",
+  limiterIA,
   requireAuth,
   asyncHandler(async (req, res) => {
     // Usa el resumen enviado por la interfaz, o lo calcula desde los datos del usuario.

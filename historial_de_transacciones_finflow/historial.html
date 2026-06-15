@@ -9,105 +9,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>iMoney - Historial de Transacciones</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind Theme Configuration -->
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "on-error-container": "#93000a",
-                    "surface-bright": "#f7f9fb",
-                    "surface-tint": "#0053db",
-                    "on-error": "#ffffff",
-                    "on-secondary-fixed": "#001a42",
-                    "on-primary-fixed-variant": "#003ea8",
-                    "on-tertiary": "#ffffff",
-                    "background": "#f7f9fb",
-                    "surface": "#f7f9fb",
-                    "tertiary": "#005e6e",
-                    "primary-fixed": "#dbe1ff",
-                    "on-surface-variant": "#434655",
-                    "on-surface": "#191c1e",
-                    "error-container": "#ffdad6",
-                    "secondary": "#0058be",
-                    "surface-container-lowest": "#ffffff",
-                    "secondary-container": "#2170e4",
-                    "surface-variant": "#e0e3e5",
-                    "on-primary": "#ffffff",
-                    "surface-container-high": "#e6e8ea",
-                    "on-primary-container": "#eeefff",
-                    "error": "#ba1a1a",
-                    "surface-container": "#eceef0",
-                    "primary": "#004ac6",
-                    "outline-variant": "#c3c6d7",
-                    "surface-container-highest": "#e0e3e5",
-                    "surface-container-low": "#f2f4f6",
-                    "on-background": "#191c1e",
-                    "on-secondary-fixed-variant": "#004395",
-                    "on-tertiary-fixed": "#001f26",
-                    "surface-dim": "#d8dadc",
-                    "inverse-surface": "#2d3133",
-                    "tertiary-fixed": "#acedff",
-                    "secondary-fixed": "#d8e2ff",
-                    "on-secondary": "#ffffff",
-                    "primary-container": "#2563eb",
-                    "on-secondary-container": "#fefcff",
-                    "primary-fixed-dim": "#b4c5ff",
-                    "outline": "#737686",
-                    "inverse-primary": "#b4c5ff",
-                    "tertiary-container": "#00788c",
-                    "tertiary-fixed-dim": "#4cd7f6",
-                    "on-tertiary-fixed-variant": "#004e5c",
-                    "on-tertiary-container": "#d7f6ff",
-                    "secondary-fixed-dim": "#adc6ff",
-                    "inverse-on-surface": "#eff1f3",
-                    "on-primary-fixed": "#00174b"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "gutter": "24px",
-                    "base": "8px",
-                    "lg": "40px",
-                    "xl": "64px",
-                    "xs": "4px",
-                    "md": "24px",
-                    "sm": "12px",
-                    "margin-mobile": "20px",
-                    "margin-desktop": "48px"
-            },
-            "fontFamily": {
-                    "body-lg": ["Inter"],
-                    "headline-lg-mobile": ["Inter"],
-                    "headline-lg": ["Inter"],
-                    "display": ["Inter"],
-                    "label-md": ["Inter"],
-                    "label-sm": ["Inter"],
-                    "headline-md": ["Inter"],
-                    "body-md": ["Inter"]
-            },
-            "fontSize": {
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="../js/tailwind-app.js"></script>
 <style>
         body {
             background-color: #f7f9fb;
@@ -213,16 +117,10 @@
         }
     </script>
     <script src="../js/api.js"></script>
+    <script src="../js/ui.js"></script>
     <script>
         API.requireSession('../login_compacto_gesti_n_de_ahorro/inicioSesion.html');
 
-        const ICONO_CAT = {
-            Comida: 'restaurant', Transporte: 'directions_car', Compras: 'shopping_bag',
-            Servicios: 'receipt_long', Salud: 'medical_services', Entretenimiento: 'sports_esports',
-            Vivienda: 'home', Ocio: 'celebration', 'Nómina': 'payments', Otros: 'payments',
-        };
-
-        // Etiqueta de grupo (Hoy / Ayer / fecha corta).
         function etiquetaFecha(iso) {
             const d = new Date(iso); const hoy = new Date();
             if (d.toDateString() === hoy.toDateString()) return 'Hoy';
@@ -235,29 +133,28 @@
             const ingreso = t.tipo === 'ingreso';
             const signo = ingreso ? '+ ' : '- ';
             const colorMonto = ingreso ? 'text-primary' : 'text-on-surface-variant';
-            return `
-            <div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(37,99,235,0.03)] transition-all duration-300">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
-                  <span class="material-symbols-outlined">${ICONO_CAT[t.categoria] || 'payments'}</span>
-                </div>
-                <div>
-                  <p class="font-headline-md text-headline-md text-on-surface text-[16px]">${t.descripcion}</p>
-                  <p class="font-label-sm text-label-sm text-outline">${hora(t.fecha)} • ${t.categoria}</p>
-                </div>
-              </div>
-              <p class="font-headline-md text-headline-md ${colorMonto}">${signo}${API.fmt(t.monto)}</p>
-            </div>`;
+            return (
+              '<div class="group flex items-center justify-between p-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_20px_rgba(37,99,235,0.03)] transition-all duration-300">' +
+              '<div class="flex items-center gap-4">' +
+              '<div class="w-12 h-12 rounded-full bg-surface-container-low flex items-center justify-center text-primary">' +
+              '<span class="material-symbols-outlined">' + (ICONO_CAT[t.categoria] || 'payments') + '</span>' +
+              '</div><div>' +
+              '<p class="font-headline-md text-headline-md text-on-surface text-[16px]">' + esc(t.descripcion) + '</p>' +
+              '<p class="font-label-sm text-label-sm text-outline">' + hora(t.fecha) + ' • ' + esc(t.categoria) + '</p>' +
+              '</div></div>' +
+              '<p class="font-headline-md text-headline-md ' + colorMonto + '">' + signo + API.fmt(t.monto) + '</p>' +
+              '</div>'
+            );
         }
 
-        async function cargarHistorial(tipo = '') {
+        async function cargarHistorial(tipo) {
+            tipo = tipo || '';
             const cont = document.getElementById('hist-list');
             const vacio = document.getElementById('hist-empty');
             try {
-                const lista = await API.listTransacciones(tipo ? `?tipo=${tipo}` : '');
+                const lista = await API.listTransacciones(tipo ? '?tipo=' + tipo : '');
                 if (!lista.length) { cont.innerHTML = ''; vacio.classList.remove('hidden'); return; }
                 vacio.classList.add('hidden');
-                // Agrupa por etiqueta de fecha conservando el orden (ya viene desc).
                 const grupos = [];
                 for (const t of lista) {
                     const k = etiquetaFecha(t.fecha);
@@ -265,16 +162,20 @@
                     if (!g) { g = { k, items: [] }; grupos.push(g); }
                     g.items.push(t);
                 }
-                cont.innerHTML = grupos.map((g) => `
-                  <section class="mb-8">
-                    <div class="flex items-center gap-4 mb-4">
-                      <h2 class="font-label-md text-label-md text-outline uppercase tracking-wider">${g.k}</h2>
-                      <div class="h-[1px] flex-grow bg-outline-variant/30"></div>
-                    </div>
-                    <div class="space-y-4">${g.items.map(itemHTML).join('')}</div>
-                  </section>`).join('');
+                cont.innerHTML = grupos.map((g) =>
+                  '<section class="mb-8">' +
+                  '<div class="flex items-center gap-4 mb-4">' +
+                  '<h2 class="font-label-md text-label-md text-outline uppercase tracking-wider">' + esc(g.k) + '</h2>' +
+                  '<div class="h-[1px] flex-grow bg-outline-variant/30"></div>' +
+                  '</div>' +
+                  '<div class="space-y-4">' + g.items.map(itemHTML).join('') + '</div>' +
+                  '</section>'
+                ).join('');
             } catch (err) {
-                cont.innerHTML = `<p class="text-center text-error py-10">${err.message}</p>`;
+                const p = document.createElement('p');
+                p.className = 'text-center text-error py-10';
+                p.textContent = err.message;
+                cont.replaceChildren(p);
             }
         }
 

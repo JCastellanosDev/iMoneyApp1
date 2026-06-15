@@ -9,6 +9,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 import cron from "node-cron";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
@@ -31,7 +32,19 @@ app.use(helmet({ contentSecurityPolicy: false })); // CSP desactivado: la UI usa
 const origenes = (process.env.CORS_ORIGIN || "*").split(",").map((s) => s.trim());
 app.use(cors({ origin: origenes.includes("*") ? true : origenes }));
 
-// Límite pequeño para todas las rutas; la de escaneo de ticket lo sobreescribe más abajo.
+// Límite global: 100 req/min por IP en toda la API.
+app.use(
+  "/api",
+  rateLimit({
+    windowMs: 60 * 1000,
+    max: 100,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { success: false, error: "RATE_LIMIT", message: "Demasiadas solicitudes. Espera un momento." },
+  })
+);
+
+// Limite pequeno para todas las rutas; la de escaneo de ticket lo sobreescribe mas abajo.
 app.use(express.json({ limit: "100kb" }));
 
 // ── Rutas públicas utilitarias ────────────────────────────────────

@@ -10,6 +10,11 @@
 import bcrypt from "bcryptjs";
 import { reemplazarTodo, generarId } from "./store.js";
 
+if (process.env.NODE_ENV === "production") {
+  console.error("[seed] ABORTADO: No se permite ejecutar seed en producción. Destruiría todos los datos reales.");
+  process.exit(1);
+}
+
 const usuarioId = generarId();
 const passwordHash = bcrypt.hashSync("demo1234", 10);
 const hoy = new Date();

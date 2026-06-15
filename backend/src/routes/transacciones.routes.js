@@ -1,7 +1,7 @@
 // ════════════════════════════════════════════════════════════════
 //  CRUD de transacciones (ingresos y gastos en una sola colección,
 //  diferenciados por `tipo`). Cubre las pantallas:
-//    - Añadir Gasto / Gasto Completado
+//    - Anadir Gasto / Gasto Completado
 //    - Agregar Ingreso / Ingreso Correcto
 //    - Historial de Transacciones (con filtros all/income/expenses)
 //
@@ -16,12 +16,10 @@ import { ok, fail, asyncHandler } from "../http.js";
 import { transacciones, generarId } from "../store.js";
 import { requireAuth } from "../auth.js";
 import { CATEGORIAS } from "../data/categorias.js";
+import { limpiar, validarFecha } from "../utils.js";
 
 const router = Router();
-router.use(requireAuth); // todas las rutas de transacciones requieren sesión
-
-const limpiar = (val, max = 200) =>
-  String(val || "").replace(/<[^>]*>/g, "").trim().slice(0, max);
+router.use(requireAuth);
 
 // Normaliza y valida el cuerpo de una transacción entrante.
 function construirTransaccion(body, usuarioId) {
@@ -30,6 +28,14 @@ function construirTransaccion(body, usuarioId) {
   if (!Number.isFinite(monto) || monto <= 0) {
     return { error: "El monto debe ser un número mayor a 0" };
   }
+
+  let fecha = new Date().toISOString();
+  if (body.fecha) {
+    const f = validarFecha(body.fecha);
+    if (!f) return { error: "La fecha proporcionada no es válida" };
+    fecha = f;
+  }
+
   const categoria = CATEGORIAS.includes(body.categoria)
     ? body.categoria
     : tipo === "ingreso"
@@ -46,7 +52,7 @@ function construirTransaccion(body, usuarioId) {
       categoria,
       metodo_pago: tipo === "gasto" ? limpiar(body.metodo_pago || "Efectivo", 50) : null,
       comercio: body.comercio ? limpiar(body.comercio, 100) : null,
-      fecha: body.fecha ? new Date(body.fecha).toISOString() : new Date().toISOString(),
+      fecha,
       recurrente: Boolean(body.recurrente),
       frecuencia: body.recurrente ? body.frecuencia || "mensual" : null,
       creado_en: new Date().toISOString(),

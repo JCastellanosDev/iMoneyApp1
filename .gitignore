@@ -3,3 +3,4 @@ backend/.env
 backend/serviceAccountKey.json
 backend/data/db.json
 *.log
+.vercel

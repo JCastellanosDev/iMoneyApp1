@@ -157,22 +157,22 @@
 <div class="space-y-sm">
 <div class="flex justify-between items-center py-sm">
 <span class="font-label-md text-label-md text-on-surface-variant">Importe</span>
-<span class="font-headline-md text-headline-md text-primary-container">$1,200.00</span>
+<span class="font-headline-md text-headline-md text-primary-container" id="ci-monto">$0.00</span>
 </div>
 <div class="h-[1px] bg-outline-variant opacity-30"></div>
 <div class="flex justify-between items-center py-sm">
 <span class="font-label-md text-label-md text-on-surface-variant">Concepto</span>
-<span class="font-body-md text-body-md text-on-surface font-medium">Sueldo Quincenal</span>
+<span class="font-body-md text-body-md text-on-surface font-medium" id="ci-desc">—</span>
 </div>
 <div class="h-[1px] bg-outline-variant opacity-30"></div>
 <div class="flex justify-between items-center py-sm">
 <span class="font-label-md text-label-md text-on-surface-variant">Fecha</span>
-<span class="font-body-md text-body-md text-on-surface">24 de Mayo, 2024</span>
+<span class="font-body-md text-body-md text-on-surface" id="ci-fecha">—</span>
 </div>
 <div class="h-[1px] bg-outline-variant opacity-30"></div>
 <div class="flex justify-between items-center py-sm">
-<span class="font-label-md text-label-md text-on-surface-variant">ID Transacción</span>
-<span class="font-body-md text-body-md text-on-surface font-mono">#FF-98234-LX</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Tipo</span>
+<span class="font-body-md text-body-md text-on-surface font-mono" id="ci-tipo">Ingreso</span>
 </div>
 </div>
 </div>
@@ -256,9 +256,24 @@
         }, 5000);
     </script>
     <script>
-        // Navegación de los botones de confirmación.
         const DASHBOARD = '../index.html';
         const HISTORIAL = '../historial_de_transacciones_finflow/historial.html';
+
+        // Rellenar tarjeta con el ingreso recién guardado.
+        const fmt = (n) => '$' + Number(n || 0).toLocaleString('es-MX', { minimumFractionDigits: 2 });
+        try {
+            const tx = JSON.parse(sessionStorage.getItem('finflow_ultimo_ingreso'));
+            if (tx) {
+                document.getElementById('ci-monto').textContent = fmt(tx.monto);
+                document.getElementById('ci-desc').textContent = tx.descripcion || tx.categoria || '—';
+                document.getElementById('ci-tipo').textContent = tx.categoria || 'Ingreso';
+                document.getElementById('ci-fecha').textContent =
+                    new Date(tx.fecha || tx.creado_en || Date.now())
+                        .toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
+            }
+        } catch { /* sin datos */ }
+
+        // Navegación de los botones de confirmación.
         document.querySelectorAll('button').forEach((b) => {
             if (/volver al inicio/i.test(b.textContent)) b.onclick = () => (window.location.href = DASHBOARD);
             if (/ver detalles/i.test(b.textContent)) b.onclick = () => (window.location.href = HISTORIAL);

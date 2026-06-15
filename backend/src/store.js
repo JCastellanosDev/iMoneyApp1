@@ -79,7 +79,8 @@ export const transacciones = {
     const doc = await ref.get();
     if (!doc.exists) return null;
     await ref.update(cambios);
-    return { ...doc.data(), ...cambios };
+    const actualizado = await ref.get();
+    return actualizado.data();
   },
 
   async borrar(id) {

@@ -110,7 +110,7 @@ Edita nombre, avatar y/o ajustes. **Pantalla:** `ajustes_finflow` (toggles Notif
 
 ---
 
-## 💸 Transacciones — Añadir Gasto / Añadir Ingreso / Historial
+## 💸 Transacciones — Anadir Gasto / Anadir Ingreso / Historial
 
 Colección unificada de ingresos y gastos, diferenciados por `tipo`.
 
@@ -245,7 +245,7 @@ OCR + extracción de un ticket. **Pantalla:** `a_adir_gasto_con_escaneo_de_ticke
 Error: `400 FALTA_IMAGEN`.
 
 ### `POST /api/coach` 🔒
-Genera 3 consejos financieros. **Pantalla:** dashboard modal "regaño"/asistente.
+Genera 3 consejos financieros. **Pantalla:** dashboard modal "regano"/asistente.
 
 | Body | Tipo | Notas |
 |------|------|-------|

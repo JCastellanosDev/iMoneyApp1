@@ -44,10 +44,10 @@ Todas las pantallas están cableadas vía `js/api.js` (cliente compartido):
 |----------|------|
 | Login / Registro / Google | guardan el JWT en `localStorage` y entran al dashboard |
 | `index.html` (home) | carga balance, distribución (donut), recientes |
-| Dashboard "regaño" | dashboard + consejos del Coach IA |
-| Cartera | balance + accesos a añadir gasto/ingreso |
-| Añadir Gasto | guarda gasto; botón **Escanear** sube foto → `/api/leer-ticket` |
-| Añadir Ingreso | guarda ingreso (con recurrencia) |
+| Dashboard "regano" | dashboard + consejos del Coach IA |
+| Cartera | balance + accesos a anadir gasto/ingreso |
+| Anadir Gasto | guarda gasto; botón **Escanear** sube foto → `/api/leer-ticket` |
+| Anadir Ingreso | guarda ingreso (con recurrencia) |
 | Historial | lista real con filtros Todos / Gastos / Ingresos |
 | Ajustes | perfil real, toggles persistentes, cerrar sesión |
 

@@ -9,104 +9,9 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>iMoney - Wallet Modal</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "surface-bright": "#f7f9fb",
-                    "error-container": "#ffdad6",
-                    "secondary": "#0058be",
-                    "surface-container": "#eceef0",
-                    "primary-fixed-dim": "#b4c5ff",
-                    "error": "#ba1a1a",
-                    "tertiary-fixed": "#acedff",
-                    "outline-variant": "#c3c6d7",
-                    "on-background": "#191c1e",
-                    "secondary-fixed-dim": "#adc6ff",
-                    "inverse-on-surface": "#eff1f3",
-                    "on-secondary-container": "#fefcff",
-                    "surface-container-low": "#f2f4f6",
-                    "primary-container": "#2563eb",
-                    "on-error": "#ffffff",
-                    "on-secondary-fixed": "#001a42",
-                    "inverse-surface": "#2d3133",
-                    "on-primary-fixed-variant": "#003ea8",
-                    "inverse-primary": "#b4c5ff",
-                    "on-tertiary-fixed": "#001f26",
-                    "surface-variant": "#e0e3e5",
-                    "on-secondary-fixed-variant": "#004395",
-                    "on-error-container": "#93000a",
-                    "surface-container-highest": "#e0e3e5",
-                    "background": "#f7f9fb",
-                    "on-tertiary": "#ffffff",
-                    "on-secondary": "#ffffff",
-                    "tertiary": "#005e6e",
-                    "surface-tint": "#0053db",
-                    "on-tertiary-fixed-variant": "#004e5c",
-                    "on-primary-container": "#eeefff",
-                    "tertiary-fixed-dim": "#4cd7f6",
-                    "on-tertiary-container": "#d7f6ff",
-                    "surface-container-lowest": "#ffffff",
-                    "on-primary-fixed": "#00174b",
-                    "surface": "#f7f9fb",
-                    "surface-container-high": "#e6e8ea",
-                    "on-surface-variant": "#434655",
-                    "on-surface": "#191c1e",
-                    "secondary-fixed": "#d8e2ff",
-                    "primary-fixed": "#dbe1ff",
-                    "surface-dim": "#d8dadc",
-                    "outline": "#737686",
-                    "on-primary": "#ffffff",
-                    "tertiary-container": "#00788c",
-                    "secondary-container": "#2170e4",
-                    "primary": "#004ac6"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "md": "24px",
-                    "margin-mobile": "20px",
-                    "xl": "64px",
-                    "margin-desktop": "48px",
-                    "lg": "40px",
-                    "gutter": "24px",
-                    "xs": "4px",
-                    "base": "8px",
-                    "sm": "12px"
-            },
-            "fontFamily": {
-                    "display": ["Inter"],
-                    "headline-lg": ["Inter"],
-                    "body-lg": ["Inter"],
-                    "label-sm": ["Inter"],
-                    "headline-md": ["Inter"],
-                    "body-md": ["Inter"],
-                    "headline-lg-mobile": ["Inter"],
-                    "label-md": ["Inter"]
-            },
-            "fontSize": {
-                    "display": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
-                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
-            }
-          },
-        },
-      }
-    </script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="../js/tailwind-app.js"></script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -203,11 +108,11 @@
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-md w-full">
 <!-- Action: Add Expense -->
-<button type="button" onclick="window.location.href='../a_adir_gasto_con_escaneo_de_ticket/añadirGasto.html'" class="group flex flex-col items-center justify-center p-xl rounded-xl bg-surface-container-low hover:bg-error-container transition-all duration-300 border border-transparent hover:border-error/20 active:scale-95">
+<button type="button" onclick="window.location.href='../a_adir_gasto_con_escaneo_de_ticket/anadirGasto.html'" class="group flex flex-col items-center justify-center p-xl rounded-xl bg-surface-container-low hover:bg-error-container transition-all duration-300 border border-transparent hover:border-error/20 active:scale-95">
 <div class="w-16 h-16 rounded-full bg-error text-on-error flex items-center justify-center mb-md shadow-lg group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-[32px]">arrow_downward</span>
 </div>
-<span class="font-headline-md text-headline-md text-on-background">Añadir Gasto</span>
+<span class="font-headline-md text-headline-md text-on-background">Anadir Gasto</span>
 <span class="text-label-sm font-label-sm text-on-surface-variant mt-xs">Pagos, compras, retiros</span>
 </button>
 <!-- Action: Add Income -->
@@ -215,7 +120,7 @@
 <div class="w-16 h-16 rounded-full bg-secondary text-on-secondary flex items-center justify-center mb-md shadow-lg group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-[32px]">arrow_upward</span>
 </div>
-<span class="font-headline-md text-headline-md text-on-background">Añadir Ingreso</span>
+<span class="font-headline-md text-headline-md text-on-background">Anadir Ingreso</span>
 <span class="text-label-sm font-label-sm text-on-surface-variant mt-xs">Salario, bonos, ventas</span>
 </button>
 </div>
@@ -283,23 +188,11 @@
         toggleModal(false);
     </script>
     <script src="../js/api.js"></script>
+    <script src="../js/ui.js"></script>
     <script>
         API.requireSession('../login_compacto_gesti_n_de_ahorro/inicioSesion.html');
         const u = API.getUser();
         if (u) document.getElementById('w-greeting').textContent = 'Hola, ' + (u.nombre || '').split(' ')[0];
-
-        const ICONO_CAT = {
-            Comida: 'restaurant', Transporte: 'directions_car', Compras: 'shopping_bag',
-            Servicios: 'receipt_long', Salud: 'medical_services', Entretenimiento: 'sports_esports',
-            Vivienda: 'home', Ocio: 'celebration', 'Nómina': 'payments', Otros: 'payments',
-        };
-        const fechaCorta = (iso) => {
-            const d = new Date(iso), hoy = new Date();
-            const h = d.toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' });
-            if (d.toDateString() === hoy.toDateString()) return 'Hoy, ' + h;
-            if (new Date(hoy.getTime() - 86400000).toDateString() === d.toDateString()) return 'Ayer, ' + h;
-            return d.toLocaleDateString('es-MX', { day: '2-digit', month: 'short' });
-        };
 
         API.dashboard()
             .then((d) => {
@@ -314,24 +207,23 @@
                 }
                 cont.innerHTML = d.recientes.map((t) => {
                     const ingreso = t.tipo === 'ingreso';
-                    return `
-                    <div class="flex items-center justify-between">
-                      <div class="flex items-center gap-sm">
-                        <div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
-                          <span class="material-symbols-outlined">${ICONO_CAT[t.categoria] || 'payments'}</span>
-                        </div>
-                        <div>
-                          <p class="font-body-md text-on-surface font-semibold">${t.descripcion}</p>
-                          <p class="font-label-sm text-label-sm text-on-surface-variant">${fechaCorta(t.fecha)} · ${t.categoria}</p>
-                        </div>
-                      </div>
-                      <p class="font-body-md font-bold ${ingreso ? 'text-primary' : 'text-on-surface'}">${ingreso ? '+' : '-'}${API.fmt(t.monto)}</p>
-                    </div>`;
+                    const colorMonto = ingreso ? 'text-primary' : 'text-on-surface';
+                    return (
+                      '<div class="flex items-center justify-between">' +
+                      '<div class="flex items-center gap-sm">' +
+                      '<div class="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">' +
+                      '<span class="material-symbols-outlined">' + (ICONO_CAT[t.categoria] || 'payments') + '</span>' +
+                      '</div><div>' +
+                      '<p class="font-body-md text-on-surface font-semibold">' + esc(t.descripcion) + '</p>' +
+                      '<p class="font-label-sm text-label-sm text-on-surface-variant">' + fechaCorta(t.fecha) + ' · ' + esc(t.categoria) + '</p>' +
+                      '</div></div>' +
+                      '<p class="font-body-md font-bold ' + colorMonto + '">' + (ingreso ? '+' : '-') + API.fmt(t.monto) + '</p>' +
+                      '</div>'
+                    );
                 }).join('');
             })
             .catch((e) => console.error(e));
 
-        // Botón "Registrar movimiento" reabre el modal de gestión.
         document.getElementById('w-open-manage').addEventListener('click', () => toggleModal(true));
     </script>
 </body></html>

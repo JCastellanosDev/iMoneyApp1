@@ -6,7 +6,11 @@ import jwt from "jsonwebtoken";
 import { fail } from "./http.js";
 import { usuarios } from "./store.js";
 
-const SECRET = process.env.TOKEN_SECRET || "dev-secret-no-usar-en-produccion";
+const SECRET = process.env.TOKEN_SECRET;
+if (!SECRET) {
+  console.error("[FATAL] TOKEN_SECRET no está configurado en .env. El servidor no puede arrancar sin él.");
+  process.exit(1);
+}
 const EXPIRA = "7d";
 
 /** Firma un token para un usuario. */

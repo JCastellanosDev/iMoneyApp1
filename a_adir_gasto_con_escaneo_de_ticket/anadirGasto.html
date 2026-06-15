@@ -95,8 +95,6 @@
 <button id="g-submit" type="button" class="w-full py-4 bg-primary text-on-primary rounded-full font-label-md text-label-md shadow-lg active:scale-[0.98] transition-all hover:bg-secondary">
   Anadir Gasto
 </button>
-<!-- Form Content -->
-<!-- Action Button -->
 </div>
 </div>
 <!-- Micro-interaction Script -->
@@ -104,111 +102,86 @@
     function closeModal() {
       const modal = document.getElementById('expenseModal');
       const dim = document.getElementById('backgroundDim');
-
       modal.classList.remove('modal-enter');
       modal.classList.add('modal-exit');
-
-      if (dim) {
-        dim.style.opacity = '0';
-      }
-
-      setTimeout(() => {
-        window.location.href = '../index.html';
-      }, 360);
+      if (dim) { dim.style.opacity = '0'; }
+      setTimeout(() => { window.location.href = '../index.html'; }, 360);
     }
 
-        function toggleChip(button) {
-            // Find all buttons in the same container
-            const container = button.parentElement;
-            const buttons = container.querySelectorAll('button');
-            
-            // Remove active classes from all
-            buttons.forEach(btn => {
-                btn.classList.remove('chip-active');
-                btn.classList.remove('bg-primary');
-                btn.classList.add('bg-surface-container-low');
-                btn.classList.add('text-on-surface-variant');
+    function toggleChip(button) {
+        const container = button.parentElement;
+        const buttons = container.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.classList.remove('chip-active', 'bg-primary');
+            btn.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+        });
+        button.classList.add('chip-active');
+        button.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const amountInput = document.getElementById('g-monto');
+        if (amountInput) {
+            amountInput.focus();
+            amountInput.addEventListener('focus', () => { setTimeout(() => amountInput.select(), 10); });
+        }
+    });
+</script>
+<script src="../js/api.js"></script>
+<script>
+    const LOGIN = '../login_compacto_gesti_n_de_ahorro/inicioSesion.html';
+    API.requireSession(LOGIN);
+
+    let categoriaDetectada = 'Otros';
+
+    function metodoPago() {
+        const activo = document.querySelector('.chip-active .text-label-md');
+        return activo ? activo.textContent.trim() : 'Efectivo';
+    }
+
+    const fileInput = document.getElementById('g-file');
+    const scanBtn = document.getElementById('g-scan');
+    scanBtn.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', async () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        const original = scanBtn.innerHTML;
+        scanBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span>';
+        try {
+            const base64 = await new Promise((resolve, reject) => {
+                const r = new FileReader();
+                r.onload = () => resolve(String(r.result).split(',')[1]);
+                r.onerror = reject;
+                r.readAsDataURL(file);
             });
-            
-            // Add active classes to the clicked one
-            button.classList.add('chip-active');
-            button.classList.remove('bg-surface-container-low');
-            button.classList.remove('text-on-surface-variant');
+            const t = await API.leerTicket(base64, file.type);
+            if (t.total) document.getElementById('g-monto').value = t.total;
+            if (t.comercio) document.getElementById('g-desc').value = t.comercio;
+            if (t.categoria) categoriaDetectada = t.categoria;
+        } catch (err) {
+            alert('No se pudo leer el ticket: ' + err.message);
+        } finally {
+            scanBtn.innerHTML = original;
         }
+    });
 
-        // Focus input on load
-        window.addEventListener('DOMContentLoaded', () => {
-            const amountInput = document.getElementById('g-monto');
-            if (amountInput) {
-                amountInput.focus();
-                amountInput.addEventListener('focus', () => {
-                    setTimeout(() => amountInput.select(), 10);
-                });
-            }
-        });
-    </script>
-    <script src="../js/api.js"></script>
-    <script>
-        const LOGIN = '../login_compacto_gesti_n_de_ahorro/inicioSesion.html';
-        API.requireSession(LOGIN);
-
-        // Categoría detectada por el escaneo (manual = Otros).
-        let categoriaDetectada = 'Otros';
-
-        // Método de pago = el chip activo.
-        function metodoPago() {
-            const activo = document.querySelector('.chip-active .text-label-md');
-            return activo ? activo.textContent.trim() : 'Efectivo';
+    document.getElementById('g-submit').addEventListener('click', async () => {
+        const monto = parseFloat(document.getElementById('g-monto').value);
+        if (!monto || monto <= 0) { alert('Ingresa un importe válido'); return; }
+        const tx = {
+            tipo: 'gasto',
+            monto,
+            descripcion: document.getElementById('g-desc').value.trim() || 'Gasto',
+            categoria: categoriaDetectada,
+            metodo_pago: metodoPago(),
+        };
+        try {
+            const creada = await API.crearTransaccion(tx);
+            sessionStorage.setItem('finflow_ultimo_gasto', JSON.stringify(creada));
+            window.location.href = 'gastoCompletado.html';
+        } catch (err) {
+            alert('No se pudo guardar: ' + err.message);
         }
-
-        // ── Escaneo de ticket con IA ──────────────────────────────
-        const fileInput = document.getElementById('g-file');
-        const scanBtn = document.getElementById('g-scan');
-        scanBtn.addEventListener('click', () => fileInput.click());
-        fileInput.addEventListener('change', async () => {
-            const file = fileInput.files[0];
-            if (!file) return;
-            const original = scanBtn.innerHTML;
-            scanBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span>';
-            try {
-                const base64 = await new Promise((resolve, reject) => {
-                    const r = new FileReader();
-                    r.onload = () => resolve(String(r.result).split(',')[1]);
-                    r.onerror = reject;
-                    r.readAsDataURL(file);
-                });
-                const t = await API.leerTicket(base64, file.type);
-                if (t.total) document.getElementById('g-monto').value = t.total;
-                if (t.comercio) document.getElementById('g-desc').value = t.comercio;
-                if (t.categoria) categoriaDetectada = t.categoria;
-            } catch (err) {
-                alert('No se pudo leer el ticket: ' + err.message);
-            } finally {
-                scanBtn.innerHTML = original;
-            }
-        });
-
-        // ── Guardar gasto ─────────────────────────────────────────
-        document.getElementById('g-submit').addEventListener('click', async () => {
-            const monto = parseFloat(document.getElementById('g-monto').value);
-            if (!monto || monto <= 0) { alert('Ingresa un importe válido'); return; }
-            const tx = {
-                tipo: 'gasto',
-                monto,
-                descripcion: document.getElementById('g-desc').value.trim() || 'Gasto',
-                categoria: categoriaDetectada,
-                metodo_pago: metodoPago(),
-            };
-            try {
-                const creada = await API.crearTransaccion(tx);
-                // Pasa la transacción a la pantalla de confirmación.
-                sessionStorage.setItem('finflow_ultimo_gasto', JSON.stringify(creada));
-                window.location.href = 'gastoCompletado.html';
-            } catch (err) {
-                alert('No se pudo guardar: ' + err.message);
-            }
-        });
-    </script>
-
-
+    });
+</script>
 </body></html>
