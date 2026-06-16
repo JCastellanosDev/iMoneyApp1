@@ -145,7 +145,9 @@
         localStorage.removeItem("imoney_dashboard_data");
         return d;
       } catch (e) {
-        // Fallback demo (igual que inicioSesion.html).
+        // Si el backend respondió con error real (401 credenciales), relanzar
+        if (e.message && !e.message.includes("conexión") && !e.message.includes("servidor")) throw e;
+        // Fallback demo solo sin conexión
         localStorage.setItem("user_session", "active");
         localStorage.setItem("user_email", email);
         return { user: { nombre: email.split("@")[0], email } };
@@ -168,11 +170,12 @@
         localStorage.removeItem("imoney_dashboard_data");
         return d;
       } catch (e) {
-        // Fallback demo: registrar localmente cuando el backend no esta disponible
+        // Si el backend respondió (error de validación / email en uso), relanzar — no hacer fallback
+        if (e.message && !e.message.includes("conexión") && !e.message.includes("servidor")) throw e;
+        // Fallback demo solo cuando no hay conexión al servidor
         localStorage.setItem("user_session", "active");
         localStorage.setItem("user_email", email);
-        // Marcar como cuenta real para que el dashboard empiece en $0
-        localStorage.setItem("imoney_real_account", "true");
+        // NO marcar como cuenta real — es demo, no tiene Firestore
         localStorage.removeItem("imoney_dashboard_data");
         const user = { nombre, email };
         setUser(user);
