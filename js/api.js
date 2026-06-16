@@ -50,7 +50,9 @@
     let json = {};
     try { json = await res.json(); } catch { /* respuesta vacía */ }
 
-    if (res.status === 401 && auth) logout();
+    // Solo cierra sesión por 401 si hay token JWT real; si es solo user_session (demo),
+    // no destruye la sesión para no desloguear al cambiar de pestaña.
+    if (res.status === 401 && auth && getToken()) logout();
 
     if (!json.success) {
       throw new Error(json.message || "Error " + res.status);
@@ -137,6 +139,15 @@
         localStorage.setItem("user_email", email);
         return { user: { nombre: email.split("@")[0], email } };
       }
+    },
+    // loginStrict: igual que login pero sin fallback demo — lanza error si las credenciales son incorrectas
+    async loginStrict(email, password) {
+      const d = await request("/auth/login", { method: "POST", auth: false, body: { email, password } });
+      setToken(d.token); setUser(d.user);
+      localStorage.setItem("imoney_real_account", "true");
+      localStorage.setItem("user_session", "active"); // mantiene sesión al cambiar de pestaña
+      localStorage.removeItem("imoney_dashboard_data");
+      return d;
     },
     async register(nombre, email, password) {
       try {
