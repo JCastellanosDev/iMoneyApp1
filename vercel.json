@@ -12,6 +12,10 @@
   ],
   "rewrites": [
     {
+      "source": "/api/transacciones(.*)",
+      "destination": "/backend/src/server.js"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/backend/src/server.js"
     }
