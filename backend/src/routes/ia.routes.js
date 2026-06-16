@@ -63,7 +63,6 @@ const limiterClasificar = rateLimit({
 router.post(
   "/clasificar",
   limiterClasificar,
-  requireAuth,
   asyncHandler(async (req, res) => {
     const { descripcion } = req.body || {};
     if (!descripcion || !String(descripcion).trim()) {

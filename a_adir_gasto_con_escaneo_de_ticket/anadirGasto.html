@@ -199,8 +199,7 @@
             categoriaDetectada = catLocal;
             mostrarCategoria(catLocal !== 'Otros' ? catLocal : null);
 
-            // 2. Gemini con debounce (solo si hay token)
-            if (!API.getToken()) return;
+            // 2. Gemini con debounce (no requiere token)
             mostrarCategoria(null, true); // muestra "Clasificando…"
             timer = setTimeout(async () => {
                 try {
