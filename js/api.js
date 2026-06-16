@@ -118,7 +118,18 @@
      * demo que guarda inicioSesion.html (user_session).
      */
     requireSession(loginUrl) {
-      if (!getToken() && !localStorage.getItem("user_session")) {
+      const hasToken   = !!getToken();
+      const hasSession = !!localStorage.getItem("user_session");
+      const isRealAccount = !!localStorage.getItem("imoney_real_account");
+
+      // Sin ninguna sesión → login
+      if (!hasToken && !hasSession) {
+        window.location.href = loginUrl;
+        return false;
+      }
+      // Cuenta real registrada pero sin JWT (sesión demo antigua) → forzar re-login
+      if (isRealAccount && !hasToken) {
+        localStorage.removeItem("user_session"); // limpia sesión inválida
         window.location.href = loginUrl;
         return false;
       }
