@@ -241,6 +241,9 @@
         };
       }
     },
+    async clasificar(descripcion) {
+      return request("/clasificar", { method: "POST", body: { descripcion } });
+    },
     async leerTicket(imageBase64, mediaType) {
       try {
         return await request("/leer-ticket", { method: "POST", body: { imageBase64, mediaType } });

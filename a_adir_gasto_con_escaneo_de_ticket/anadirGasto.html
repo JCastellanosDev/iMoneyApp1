@@ -160,21 +160,60 @@
         return 'Otros';
     }
 
-    // Engancha el clasificador al campo de descripción
-    (function () {
-        const descInput = document.getElementById('g-desc');
+    // Muestra el badge con la categoría detectada
+    function mostrarCategoria(cat, loading) {
         const badge = document.getElementById('g-cat-badge');
         const label = document.getElementById('g-cat-label');
+        if (loading) {
+            label.textContent = 'Clasificando…';
+            badge.classList.remove('hidden');
+            return;
+        }
+        if (cat && cat !== 'Otros') {
+            label.textContent = cat;
+            badge.classList.remove('hidden');
+        } else {
+            badge.classList.add('hidden');
+        }
+    }
+
+    // Engancha el clasificador al campo de descripción
+    // Flujo: keywords instantáneos → Gemini con debounce 600ms
+    (function () {
+        const descInput = document.getElementById('g-desc');
         if (!descInput) return;
+        let timer = null;
+
         descInput.addEventListener('input', () => {
-            const cat = clasificarPorDescripcion(descInput.value);
-            categoriaDetectada = cat;
-            if (cat !== 'Otros' && descInput.value.trim()) {
-                label.textContent = cat;
-                badge.classList.remove('hidden');
-            } else {
-                badge.classList.add('hidden');
+            const texto = descInput.value.trim();
+            clearTimeout(timer);
+
+            if (!texto) {
+                categoriaDetectada = 'Otros';
+                mostrarCategoria(null);
+                return;
             }
+
+            // 1. Keywords instantáneos como resultado provisional
+            const catLocal = clasificarPorDescripcion(texto);
+            categoriaDetectada = catLocal;
+            mostrarCategoria(catLocal !== 'Otros' ? catLocal : null);
+
+            // 2. Gemini con debounce (solo si hay token)
+            if (!API.getToken()) return;
+            mostrarCategoria(null, true); // muestra "Clasificando…"
+            timer = setTimeout(async () => {
+                try {
+                    const res = await API.clasificar(texto);
+                    if (res && res.categoria) {
+                        categoriaDetectada = res.categoria;
+                        mostrarCategoria(res.categoria);
+                    }
+                } catch {
+                    // Si falla Gemini, queda el resultado local
+                    mostrarCategoria(catLocal !== 'Otros' ? catLocal : null);
+                }
+            }, 600);
         });
     })();
 

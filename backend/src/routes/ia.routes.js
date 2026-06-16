@@ -48,6 +48,56 @@ function parsearJson(texto) {
   }
 }
 
+// Rate-limit más permisivo para clasificación (llamadas frecuentes mientras el usuario escribe)
+const limiterClasificar = rateLimit({
+  windowMs: 60 * 1000,
+  max: 40,
+  standardHeaders: true,
+  legacyHeaders: false,
+  keyGenerator: (req) =>
+    (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip,
+  message: { success: false, error: "RATE_LIMIT", message: "Demasiadas solicitudes. Espera un momento." },
+});
+
+// ── Clasificar descripción ────────────────────────────────────────
+router.post(
+  "/clasificar",
+  limiterClasificar,
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    const { descripcion } = req.body || {};
+    if (!descripcion || !String(descripcion).trim()) {
+      return fail(res, 400, "FALTA_DESCRIPCION", "Falta la descripción");
+    }
+
+    // Sin Gemini → fallback a "Otros"
+    if (!genAI) {
+      return ok(res, { categoria: "Otros" }, "Sin GEMINI_API_KEY, se usó Otros");
+    }
+
+    const prompt = `Clasifica el siguiente gasto en UNA sola categoría de esta lista:
+${CATEGORIAS.join(", ")}.
+
+Descripción del gasto: "${String(descripcion).trim()}"
+
+Responde ÚNICAMENTE con el nombre exacto de la categoría (sin comillas, sin puntos, sin explicación).`;
+
+    try {
+      const model = genAI.getGenerativeModel({ model: MODELO });
+      const result = await model.generateContent(prompt);
+      const raw = result.response.text().trim();
+      // Asegurarse de que la respuesta sea una categoría válida
+      const categoria = CATEGORIAS.find(
+        (c) => c.toLowerCase() === raw.toLowerCase()
+      ) || "Otros";
+      return ok(res, { categoria }, "Categoría detectada");
+    } catch (err) {
+      console.error("[clasificar] Gemini falló:", err.message);
+      return ok(res, { categoria: "Otros" }, "Fallback a Otros");
+    }
+  })
+);
+
 // ── Escaneo de ticket ─────────────────────────────────────────────
 const PROMPT_TICKET = `Eres un asistente que lee tickets de compra mexicanos.
 Analiza la imagen del ticket y devuelve ÚNICAMENTE un objeto JSON válido,
