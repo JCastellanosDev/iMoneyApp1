@@ -78,6 +78,10 @@
 <div class="flex flex-col space-y-xs">
 <label class="text-label-md text-on-surface-variant ml-1">Descripción</label>
 <input id="g-desc" class="w-full p-4 rounded-xl bg-surface-container-low border-none focus:ring-2 focus:ring-primary text-body-lg text-on-surface" placeholder="¿En qué gastaste?" type="text">
+<div id="g-cat-badge" class="hidden flex items-center gap-1 mt-1 ml-1">
+  <span class="material-symbols-outlined text-primary" style="font-size:16px">auto_awesome</span>
+  <span class="text-label-sm text-primary" id="g-cat-label"></span>
+</div>
 </div><div class="flex flex-col space-y-xs">
   <label class="text-label-md text-on-surface-variant ml-1">Método de Pago</label>
   <div class="flex gap-2">
@@ -126,6 +130,7 @@
             amountInput.addEventListener('focus', () => { setTimeout(() => amountInput.select(), 10); });
         }
     });
+
 </script>
 <script src="../js/api.js"></script>
 <script>
@@ -133,6 +138,45 @@
     API.requireSession(LOGIN);
 
     let categoriaDetectada = 'Otros';
+
+    // Clasificador de categoría por palabras clave en la descripción
+    const KEYWORDS_CAT = {
+        'Comida':          ['taco','tacos','comida','restaurante','pizza','burger','pollo','sushi','café','cafe','panaderia','tortilleria','oxxo','seven','7-eleven','dominos','wendys','mcdonalds','kfc','starbucks','bimbo','soriana','chedraui','mercado','fondita','torta','tamales'],
+        'Transporte':      ['uber','didi','taxi','gasolina','gas','autobus','camion','metro','transporte','caseta','estacionamiento','escuela','bici','moto','lyft','cabify'],
+        'Compras':         ['amazon','walmart','liverpool','coppel','sears','mercado libre','tienda','ropa','zapatos','shein','zara','h&m','costco','sam\'s','sams'],
+        'Servicios':       ['luz','cfe','agua','internet','telmex','telcel','movistar','at&t','telefono','cable','izzi','totalplay','factura','recibo','plan'],
+        'Salud':           ['farmacia','doctor','medicina','hospital','medico','dentista','benavides','similares','gym','gimnasio','consulta','pastillas','vitaminas'],
+        'Entretenimiento': ['netflix','spotify','disney','cine','cinema','hbo','youtube','twitch','juego','videojuego','prime','apple tv','crunchyroll','dazn'],
+        'Vivienda':        ['renta','departamento','casa','mantenimiento','plomero','electricista','pintura','muebles','ikea'],
+        'Ocio':            ['bar','antro','discoteca','cerveza','bebida','vino','mezcal','tequila','fiesta','copa'],
+        'Nómina':          ['sueldo','nomina','salario','pago empresa','transferencia','deposito'],
+    };
+
+    function clasificarPorDescripcion(desc) {
+        const lower = (desc || '').toLowerCase();
+        for (const [cat, words] of Object.entries(KEYWORDS_CAT)) {
+            if (words.some(w => lower.includes(w))) return cat;
+        }
+        return 'Otros';
+    }
+
+    // Engancha el clasificador al campo de descripción
+    (function () {
+        const descInput = document.getElementById('g-desc');
+        const badge = document.getElementById('g-cat-badge');
+        const label = document.getElementById('g-cat-label');
+        if (!descInput) return;
+        descInput.addEventListener('input', () => {
+            const cat = clasificarPorDescripcion(descInput.value);
+            categoriaDetectada = cat;
+            if (cat !== 'Otros' && descInput.value.trim()) {
+                label.textContent = cat;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        });
+    })();
 
     function metodoPago() {
         const activo = document.querySelector('.chip-active .text-label-md');
@@ -156,8 +200,16 @@
             });
             const t = await API.leerTicket(base64, file.type);
             if (t.total) document.getElementById('g-monto').value = t.total;
-            if (t.comercio) document.getElementById('g-desc').value = t.comercio;
-            if (t.categoria) categoriaDetectada = t.categoria;
+            if (t.comercio) {
+                document.getElementById('g-desc').value = t.comercio;
+                document.getElementById('g-desc').dispatchEvent(new Event('input'));
+            }
+            if (t.categoria) {
+                categoriaDetectada = t.categoria;
+                const label = document.getElementById('g-cat-label');
+                const badge = document.getElementById('g-cat-badge');
+                if (label && badge) { label.textContent = t.categoria; badge.classList.remove('hidden'); }
+            }
         } catch (err) {
             alert('No se pudo leer el ticket: ' + err.message);
         } finally {
