@@ -127,7 +127,10 @@
     async login(email, password) {
       try {
         const d = await request("/auth/login", { method: "POST", auth: false, body: { email, password } });
-        setToken(d.token); setUser(d.user); return d;
+        setToken(d.token); setUser(d.user);
+        localStorage.setItem("imoney_real_account", "true");
+        localStorage.removeItem("imoney_dashboard_data");
+        return d;
       } catch (e) {
         // Fallback demo (igual que inicioSesion.html).
         localStorage.setItem("user_session", "active");
@@ -138,7 +141,10 @@
     async register(nombre, email, password) {
       try {
         const d = await request("/auth/register", { method: "POST", auth: false, body: { nombre, email, password } });
-        setToken(d.token); setUser(d.user); return d;
+        setToken(d.token); setUser(d.user);
+        localStorage.setItem("imoney_real_account", "true");
+        localStorage.removeItem("imoney_dashboard_data");
+        return d;
       } catch (e) {
         // Fallback demo: registrar localmente cuando el backend no esta disponible
         localStorage.setItem("user_session", "active");
@@ -187,7 +193,10 @@
       const tipoNorm = String(tx.tipo || "").toLowerCase() === "ingreso" ? "ingreso" : "gasto";
       const txNorm = { ...tx, tipo: tipoNorm };
       try {
-        return await request("/transacciones", { method: "POST", body: txNorm });
+        const result = await request("/transacciones", { method: "POST", body: txNorm });
+        // Limpia el caché para que el dashboard recargue datos frescos de Firestore
+        localStorage.removeItem("imoney_dashboard_data");
+        return result;
       } catch (e) {
         const d = mockDashboard();
         const nueva = { ...txNorm, id: Date.now(), fecha: new Date().toISOString(), creado_en: new Date().toISOString() };
