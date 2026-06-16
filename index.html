@@ -116,10 +116,8 @@
 <script src="./js/api.js"></script>
 <script src="./js/ui.js"></script>
 <script>
-    // Forzamos la sesión activa local en lugar de romper por la redirección de la API
-    if (!localStorage.getItem('user_session')) {
-        localStorage.setItem('user_session', 'active');
-    }
+    // Redirige al login si no hay sesión activa (token JWT o demo)
+    API.requireSession('./login_compacto_gesti_n_de_ahorro/inicioSesion.html');
 
     // --- GENERADOR DE DATOS DEL DASHBOARD ---
     function obtenerDatosDashboard() {
@@ -156,30 +154,36 @@
         return JSON.parse(datosLocales);
     }
 
-    // --- CARGA DINÁMICA EN PANTALLA ---
-    const d = obtenerDatosDashboard();
-
-    // Formateador de moneda alternativo seguro
+    // Formateador de moneda seguro
     const fmtMoneda = (val) => '$' + (Number(val) || 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
-    // Seteamos los textos de los balances en los nodos correspondientes
-    document.getElementById('db-balance').textContent = fmtMoneda(d.disponible);
-    document.getElementById('db-gastado').textContent = fmtMoneda(d.gastado);
-    document.getElementById('db-ahorros').textContent = fmtMoneda(d.ahorros.actual);
+    function renderDashboard(d) {
+        if (!d) return;
+        document.getElementById('db-balance').textContent = fmtMoneda(d.disponible);
+        document.getElementById('db-gastado').textContent  = fmtMoneda(d.gastado);
+        document.getElementById('db-ahorros').textContent  = fmtMoneda(d.ahorros?.actual ?? 0);
+        const pct = d.ingresos > 0 ? Math.round((d.gastado / d.ingresos) * 100) : 0;
+        if (typeof pintarDonut === 'function')
+            pintarDonut(document.getElementById('db-donut'), d.distribucion, document.getElementById('db-legend'));
+        if (typeof animarContador === 'function')
+            animarContador(document.getElementById('db-donut-pct'), pct);
+        if (typeof pintarRecientes === 'function')
+            pintarRecientes(document.getElementById('db-recientes'), d.recientes);
+    }
 
-    // Cálculo de porcentaje de uso del presupuesto general
-    const pct = d.ingresos > 0 ? Math.round((d.gastado / d.ingresos) * 100) : 0;
+    // Render inmediato desde localStorage (sin esperar red)
+    renderDashboard(obtenerDatosDashboard());
 
-    // Pintado de componentes usando los métodos globales de ui.js
-    if (typeof pintarDonut === 'function') {
-        pintarDonut(document.getElementById('db-donut'), d.distribucion, document.getElementById('db-legend'));
-    }
-    if (typeof animarContador === 'function') {
-        animarContador(document.getElementById('db-donut-pct'), pct);
-    }
-    if (typeof pintarRecientes === 'function') {
-        pintarRecientes(document.getElementById('db-recientes'), d.recientes);
-    }
+    // Luego actualiza desde el backend y refresca pantalla
+    (async () => {
+        try {
+            const fresh = await API.dashboard();
+            if (fresh) {
+                localStorage.setItem('imoney_dashboard_data', JSON.stringify(fresh));
+                renderDashboard(fresh);
+            }
+        } catch (e) { /* sin conexión — ya se mostró el caché */ }
+    })();
 
     // Evento del logo hacia la pantalla de aviso/regano
     document.querySelector('header img')?.closest('div')?.addEventListener('click', () => {
