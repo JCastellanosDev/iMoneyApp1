@@ -117,7 +117,6 @@ Si la imagen no es un ticket legible, devuelve total 0 y categoria "Otros".`;
 router.post(
   "/leer-ticket",
   limiterIA,
-  requireAuth,
   asyncHandler(async (req, res) => {
     const { imageBase64, mediaType } = req.body || {};
     if (!imageBase64) {
