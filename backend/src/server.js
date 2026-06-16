@@ -9,7 +9,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import cron from "node-cron";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
@@ -42,7 +42,7 @@ app.use(
     standardHeaders: true,
     legacyHeaders: false,
     keyGenerator: (req) =>
-      (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip,
+      ipKeyGenerator((req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip),
     message: { success: false, error: "RATE_LIMIT", message: "Demasiadas solicitudes. Espera un momento." },
   })
 );

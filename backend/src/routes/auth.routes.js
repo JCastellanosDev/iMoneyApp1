@@ -10,7 +10,7 @@
 // ════════════════════════════════════════════════════════════════
 import { Router } from "express";
 import bcrypt from "bcryptjs";
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { ok, fail, asyncHandler } from "../http.js";
 import { usuarios, generarId } from "../store.js";
 import { firmarToken, usuarioPublico, requireAuth } from "../auth.js";
@@ -25,7 +25,7 @@ const limiterAuth = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: (req) =>
-    (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip,
+    ipKeyGenerator((req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip),
   message: { success: false, error: "DEMASIADOS_INTENTOS", message: "Demasiados intentos. Espera 15 minutos." },
 });
 

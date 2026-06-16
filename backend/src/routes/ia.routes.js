@@ -8,7 +8,7 @@
 // ════════════════════════════════════════════════════════════════
 import { Router } from "express";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import rateLimit from "express-rate-limit";
+import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import { ok, fail, asyncHandler } from "../http.js";
 import { requireAuth } from "../auth.js";
 import { calcularResumen } from "../resumen.js";
@@ -27,7 +27,7 @@ const limiterIA = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: (req) =>
-    (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip,
+    ipKeyGenerator((req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip),
   message: { success: false, error: "RATE_LIMIT", message: "Demasiadas solicitudes de IA. Espera un momento." },
 });
 
@@ -55,7 +55,7 @@ const limiterClasificar = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: (req) =>
-    (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip,
+    ipKeyGenerator((req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip),
   message: { success: false, error: "RATE_LIMIT", message: "Demasiadas solicitudes. Espera un momento." },
 });
 

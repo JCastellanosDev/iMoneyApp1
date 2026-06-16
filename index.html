@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <script src="./js/tailwind-app.js"></script>
     <style>
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; visibility: hidden; }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
@@ -28,7 +28,7 @@
 <header class="w-full top-0 sticky z-50 bg-surface dark:bg-background">
     <div class="flex justify-between items-center px-margin-mobile w-full max-w-7xl mx-auto">
         <div class="flex items-center gap-3">
-            <img src="./img/logo-sm.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
+            <img src="./img/logo.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
             <h1 class="brand-name font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed"><span class="brand-i">i</span>Money</h1>
         </div>
         <button class="text-primary dark:text-inverse-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform p-2">
@@ -116,8 +116,12 @@
 <script src="./js/api.js"></script>
 <script src="./js/ui.js"></script>
 <script>
-    // Redirige al login si no hay sesión activa (token JWT o demo)
-    API.requireSession('./login_compacto_gesti_n_de_ahorro/inicioSesion.html');
+    // Redirige al login si no hay sesión activa; si hay sesión, muestra el body
+    if (!API.requireSession('./login_compacto_gesti_n_de_ahorro/inicioSesion.html')) {
+        // requireSession ya redirigió — no hacer nada más
+    } else {
+        document.body.style.visibility = 'visible';
+    }
 
     // --- GENERADOR DE DATOS DEL DASHBOARD ---
     function obtenerDatosDashboard() {

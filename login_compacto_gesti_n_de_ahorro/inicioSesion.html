@@ -34,7 +34,7 @@
 
 <header class="w-full top-0 left-0 flex items-center justify-center px-container-margin py-md">
     <div class="flex items-center gap-sm">
-        <img src="../img/logo-sm.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
+        <img src="../img/logo.png" alt="iMoney" class="w-10 h-10 rounded-xl shadow-sm object-contain"/>
         <span class="brand-name font-headline-md text-headline-md font-bold text-primary tracking-tight"><span class="brand-i">i</span>Money</span>
     </div>
 </header>
@@ -137,40 +137,58 @@
         if (/regístrate/i.test(a.textContent)) a.setAttribute('href', REGISTRO);
     });
 
-    // --- SIMULACIÓN DE INICIO DE SESIÓN INTEGRADA ---
-    document.getElementById('loginForm').addEventListener('submit', function (e) {
+    // Muestra un mensaje de error en el formulario
+    function mostrarError(msg) {
+        let el = document.getElementById('login-error');
+        if (!el) {
+            el = document.createElement('p');
+            el.id = 'login-error';
+            el.className = 'text-sm text-red-500 text-center font-medium mt-1';
+            document.getElementById('loginForm').prepend(el);
+        }
+        el.textContent = msg;
+    }
+    function limpiarError() {
+        const el = document.getElementById('login-error');
+        if (el) el.textContent = '';
+    }
+
+    // --- INICIO DE SESIÓN REAL ---
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
         e.preventDefault();
+        limpiarError();
 
-        const btn = this.querySelector('button[type="submit"]');
-        const originalContent = btn.innerHTML;
+        const email    = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const btn      = this.querySelector('button[type="submit"]');
+        const original = btn.innerHTML;
 
-        // Animación de carga activa
         btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> <span>Accediendo...</span>';
-        btn.disabled = true;
-        btn.classList.add('opacity-80');
+        btn.disabled  = true;
 
-        // Espera controlada de 1 segundo para mejorar el UX
-        setTimeout(() => {
-            // Almacenamos credenciales temporales ficticias en el navegador
-            localStorage.setItem('user_session', 'active');
-            localStorage.setItem('user_email', document.getElementById('email').value.trim());
-
-            // Redirección directa al archivo principal (Dashboard)
+        try {
+            await API.loginStrict(email, password);
             window.location.href = DASHBOARD;
-        }, 1000);
+        } catch (err) {
+            mostrarError(err.message || 'Correo o contraseña incorrectos');
+            btn.innerHTML = original;
+            btn.disabled  = false;
+        }
     });
 
-    // --- SIMULACIÓN DE INICIO DE SESIÓN CON GOOGLE ---
+    // --- GOOGLE (mantiene el flujo actual por ahora) ---
     const googleBtn = Array.from(document.querySelectorAll('button[type="button"]'))
         .find((b) => /google/i.test(b.textContent));
 
-    googleBtn?.addEventListener('click', () => {
+    googleBtn?.addEventListener('click', async () => {
         const email = prompt('Correo de Google para continuar:');
         if (!email) return;
-
-        localStorage.setItem('user_session', 'active');
-        localStorage.setItem('user_email', email.trim());
-        window.location.href = DASHBOARD;
+        try {
+            await API.google(email, email.split('@')[0]);
+            window.location.href = DASHBOARD;
+        } catch {
+            mostrarError('No se pudo continuar con Google');
+        }
     });
 </script>
 </body>
