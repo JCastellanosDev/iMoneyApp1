@@ -160,7 +160,7 @@
     const d = obtenerDatosDashboard();
 
     // Formateador de moneda alternativo seguro
-    const fmtMoneda = (val) => '$' + val.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    const fmtMoneda = (val) => '$' + (Number(val) || 0).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
 
     // Seteamos los textos de los balances en los nodos correspondientes
     document.getElementById('db-balance').textContent = fmtMoneda(d.disponible);

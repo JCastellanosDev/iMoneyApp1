@@ -33,6 +33,7 @@ const origenes = (process.env.CORS_ORIGIN || "*").split(",").map((s) => s.trim()
 app.use(cors({ origin: origenes.includes("*") ? true : origenes }));
 
 // Límite global: 100 req/min por IP en toda la API.
+// keyGenerator usa X-Forwarded-For en Vercel (proxy) y req.ip en local.
 app.use(
   "/api",
   rateLimit({
@@ -40,11 +41,16 @@ app.use(
     max: 100,
     standardHeaders: true,
     legacyHeaders: false,
+    keyGenerator: (req) =>
+      (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip,
     message: { success: false, error: "RATE_LIMIT", message: "Demasiadas solicitudes. Espera un momento." },
   })
 );
 
-// Limite pequeno para todas las rutas; la de escaneo de ticket lo sobreescribe mas abajo.
+// El escaneo de ticket necesita hasta 15 MB; debe registrarse ANTES del límite
+// global de 100 kb para que body-parser no rechace la imagen primero.
+app.use("/api/leer-ticket", express.json({ limit: "15mb" }));
+// Límite global para el resto de rutas.
 app.use(express.json({ limit: "100kb" }));
 
 // ── Rutas públicas utilitarias ────────────────────────────────────
@@ -58,8 +64,6 @@ app.get("/api/categorias", (req, res) =>
 app.use("/api", authRoutes); // /api/auth/*, /api/perfil
 app.use("/api/transacciones", transaccionesRoutes);
 app.use("/api", dashboardRoutes); // /api/dashboard, /api/config/ingreso, /api/ahorros
-// La ruta de escaneo de ticket acepta imágenes en base64 (hasta 15 MB).
-app.use("/api/leer-ticket", express.json({ limit: "15mb" }));
 app.use("/api", iaRoutes);      // /api/leer-ticket, /api/coach
 app.use("/api", reportesRoutes); // /api/reporte, /api/reporte/:mes, /api/reporte/generar
 
@@ -120,16 +124,20 @@ cron.schedule("0 0 1 * *", async () => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`\n✅ FinFlow API en http://localhost:${PORT}`);
-  console.log(`   GET  /api/health`);
-  console.log(`   POST /api/auth/register | /api/auth/login | /api/auth/google`);
-  console.log(`   CRUD /api/transacciones`);
-  console.log(`   GET  /api/dashboard`);
-  console.log(`   POST /api/leer-ticket | /api/coach`);
-  console.log(`   GET  /api/reporte | POST /api/reporte/generar`);
-  console.log(`   IA   ${process.env.GEMINI_API_KEY ? "Gemini ACTIVA" : "modo DEMO (sin GEMINI_API_KEY)"}`);
-  console.log(`   DB   Firestore (Firebase)\n`);
-});
+// Solo inicia el servidor HTTP en entorno local; en Vercel (serverless) se
+// exporta `app` directamente y el listen no tiene efecto ni debe ejecutarse.
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n✅ FinFlow API en http://localhost:${PORT}`);
+    console.log(`   GET  /api/health`);
+    console.log(`   POST /api/auth/register | /api/auth/login | /api/auth/google`);
+    console.log(`   CRUD /api/transacciones`);
+    console.log(`   GET  /api/dashboard`);
+    console.log(`   POST /api/leer-ticket | /api/coach`);
+    console.log(`   GET  /api/reporte | POST /api/reporte/generar`);
+    console.log(`   IA   ${process.env.GEMINI_API_KEY ? "Gemini ACTIVA" : "modo DEMO (sin GEMINI_API_KEY)"}`);
+    console.log(`   DB   Firestore (Firebase)\n`);
+  });
+}
 
 export default app;

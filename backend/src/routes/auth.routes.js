@@ -24,6 +24,8 @@ const limiterAuth = rateLimit({
   max: 10,
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator: (req) =>
+    (req.headers["x-forwarded-for"] || "").split(",")[0].trim() || req.ip,
   message: { success: false, error: "DEMASIADOS_INTENTOS", message: "Demasiados intentos. Espera 15 minutos." },
 });
 
